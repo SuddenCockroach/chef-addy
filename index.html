@@ -64,6 +64,18 @@ body{
   overflow-x:hidden;
 }
 [data-theme="dark"] body{background:#080808}
+
+/* ══════════════════════════════════════
+   TOAST NOTIFICATION (NEW)
+══════════════════════════════════════ */
+.toast {
+  position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px);
+  background: var(--green); color: #000; padding: 12px 24px; border-radius: 50px;
+  font-weight: 600; opacity: 0; transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
+  z-index: 9999; font-size: 14px; box-shadow: 0 4px 20px var(--g-glow);
+}
+.toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
 /* ══════════════════════════════════════
    HEADER
 ══════════════════════════════════════ */
@@ -95,13 +107,9 @@ body{
 .hdr-btn:active{background:var(--s3);transform:scale(0.93)}
 
 /* ══════════════════════════════════════
-   LAYOUT
+   LAYOUT & TABS
 ══════════════════════════════════════ */
 .wrap{max-width:500px;margin:0 auto;padding:22px 16px 0}
-
-/* ══════════════════════════════════════
-   TABS
-══════════════════════════════════════ */
 .tab{display:none}
 .tab.active{display:block;animation:tabUp 0.38s cubic-bezier(0.22,1,0.36,1) both}
 @keyframes tabUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
@@ -229,7 +237,7 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
 .pill:active{transform:scale(0.93)}
 
 /* ══════════════════════════════════════
-   EXPENSE ITEMS + DRAG & DROP IMPROVEMENT
+   EXPENSE ITEMS (DRAG & DROP)
 ══════════════════════════════════════ */
 .expense-list{margin-bottom:12px}
 .expense-item{
@@ -265,48 +273,29 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
 .brow.profit{color:var(--green);font-weight:600}
 .brow.loss{color:var(--red);font-weight:600}
 
-/* (all remaining original styles are preserved exactly below) */
+/* ══════════════════════════════════════
+   TIER CARDS
+══════════════════════════════════════ */
 .tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .tier{
   background:rgba(0,0,0,0.25);
   border:1.5px solid var(--bd);border-radius:var(--r);
-  padding:16px 8px 14px;text-align:center;cursor:pointer;
+  padding:16px 8px 14px;text-align:center;
   transition:border-color 0.2s,background 0.2s,transform 0.12s,box-shadow 0.2s;
   animation:tabUp 0.3s both;position:relative;user-select:none;
 }
 [data-theme="light"] .tier{background:var(--s2)}
-.tier:active{transform:scale(0.95)}
 .tier.hi{background:var(--g-dim);border-color:var(--g-bd)}
-.tier.selected{
-  background:var(--g-dim) !important;
-  border-color:var(--green) !important;
-  border-width:2px !important;
-  box-shadow:0 0 24px rgba(29,245,138,0.18);
-}
-.tier.selected::after{
-  content:'';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);
-  width:0;height:0;
-  border-left:8px solid transparent;border-right:8px solid transparent;border-top:8px solid var(--green);z-index:1;
-}
 .tier-name{font-size:8px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--dim);margin-bottom:8px}
-.tier.hi .tier-name,.tier.selected .tier-name{color:var(--green)}
+.tier.hi .tier-name{color:var(--green)}
 .tier-price{font-family:'Fraunces',serif;font-size:clamp(20px,5vw,26px);font-weight:800;letter-spacing:-0.04em}
 .tier-unit{font-size:9px;color:var(--sub);margin:2px 0 8px}
 .tier-row{font-size:10px;color:var(--sub);margin-top:4px}
 .tier-row strong{display:block;font-family:'Fraunces',serif;font-size:12px;font-weight:700;color:var(--text)}
-.tier-tap{font-size:9px;color:var(--dim);margin-top:8px;letter-spacing:0.03em}
-.tier.selected .tier-tap{color:var(--green)}
-.scenario-panel{
-  display:none;
-  background:var(--s1);
-  border:2px solid var(--g-bd);
-  border-radius:var(--rlg);
-  padding:22px 17px 20px;
-  margin-top:14px;
-  animation:tabUp 0.32s cubic-bezier(0.22,1,0.36,1) both;
-  box-shadow:0 8px 40px rgba(0,0,0,0.35),0 0 0 1px var(--g-bd);
-}
-.scenario-panel.show{display:block}
+
+/* ══════════════════════════════════════
+   WHAT IF? PANEL (Now in a Bottom Sheet)
+══════════════════════════════════════ */
 .scenario-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
 .sc-badge{
   display:inline-flex;align-items:center;gap:6px;
@@ -372,6 +361,10 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
 .sc-sum-row.profit-row{color:var(--green);font-weight:700}
 .sc-sum-row.loss-row{color:var(--red);font-weight:700}
 .sc-sum-row.be-row{color:var(--amber);font-weight:700}
+
+/* ══════════════════════════════════════
+   RESULT BOX
+══════════════════════════════════════ */
 .result-box{
   margin-top:16px;
   background:var(--s1);
@@ -390,6 +383,10 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
 }
 .r-pill strong{display:block;font-family:'Fraunces',serif;font-size:14px;font-weight:700;letter-spacing:-0.03em;color:var(--text);margin-top:2px}
 .r-pill.hi{border-color:var(--g-bd)}.r-pill.hi strong{color:var(--green)}
+
+/* ══════════════════════════════════════
+   SALES LOG & HISTORY
+══════════════════════════════════════ */
 .log-form-wrap{
   background:var(--s1);
   border:1px solid var(--bd);
@@ -524,6 +521,10 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
 .tag.green{background:var(--g-dim);color:var(--green);border:1px solid var(--g-bd)}
 .tag.amber{background:var(--a-dim);color:var(--amber);border:1px solid var(--a-bd)}
 .tag.red{background:var(--r-dim);color:var(--red);border:1px solid var(--r-bd)}
+
+/* ══════════════════════════════════════
+   BOTTOM NAV & SHEETS
+══════════════════════════════════════ */
 .bnav{
   position:fixed;bottom:0;left:0;right:0;z-index:400;
   background:rgba(8,8,8,0.92);
@@ -565,7 +566,9 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
 </style>
 </head>
 <body data-theme="dark">
-<!-- [YOUR ORIGINAL BODY HTML IS 100% UNCHANGED BELOW] -->
+
+<div id="toast" class="toast">Sale recorded!</div>
+
 <header class="hdr">
   <div class="hdr-in">
     <div class="brand">
@@ -581,8 +584,9 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
     </button>
   </div>
 </header>
+
 <main class="wrap">
-<!-- ══════ TAB 0: HOME ══════ -->
+
 <div id="tab-0" class="tab active">
   <p class="eyebrow">Weekend Business</p>
   <h1 class="pg-title" id="home-title">Good morning,<br><em>Tasalla.</em></h1>
@@ -615,10 +619,10 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
   </div>
   <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
 </div>
-<!-- ══════ TAB 1: PRICE MY DISH ══════ -->
+
 <div id="tab-1" class="tab">
   <h1 class="pg-title">Price My <em>Dish</em></h1>
-  <p class="pg-sub">Enter your costs and margin — then tap a tier to run "What If?" scenarios.</p>
+  <p class="pg-sub">Enter your costs and margin — then run "What If?" scenarios.</p>
   <div class="card">
     <div class="field">
       <label class="lbl">What are you cooking?</label>
@@ -655,70 +659,11 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
   <div id="price-result" style="display:none">
     <div class="result-box">
       <div class="result-lbl" id="r-lbl">Your Pricing Tiers</div>
+      
       <div class="tier-grid" id="r-tier-grid"></div>
-      <div class="scenario-panel" id="scenario-panel">
-        <div class="scenario-hd">
-          <div class="sc-badge">
-            <svg width="10" height="10" viewBox="0 0 12 12" fill="var(--green)"><path d="M6 1C3.24 1 1 3.24 1 6s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm.5 7.5h-1v-4h1v4zm0-5.5h-1V2h1v1z"/></svg>
-            <span id="sc-badge-text">What If?</span>
-          </div>
-          <div class="sc-close" onclick="closeScenario()">✕</div>
-        </div>
-        <div class="pl-display">
-          <div class="pl-label" id="sc-pl-label">Your estimated profit</div>
-          <div class="pl-amount profit" id="sc-pl-amount">—</div>
-          <div class="pl-meta" id="sc-pl-meta">Slide the portions below to see your outcome</div>
-        </div>
-        <div class="health-bar-wrap">
-          <div class="health-bar-label" id="health-label">Profit health</div>
-          <div class="health-track"><div class="health-fill" id="health-fill" style="width:0%;background:var(--green)"></div></div>
-        </div>
-        <div class="sc-tiers">
-          <div class="sc-tier-row" id="sc-row-0">
-            <div class="sc-tier-meta">
-              <span class="sc-tier-name s">Small</span>
-              <span class="sc-tier-price" id="sc-tp-0">GHS 0 / serving</span>
-            </div>
-            <div class="sc-tier-qty-row">
-              <div class="sc-tier-qty"><span id="sc-qty-0">0</span> <small>portions</small></div>
-              <div class="sc-tier-rev">Revenue<strong id="sc-rev-0">GHS 0</strong></div>
-            </div>
-            <input type="range" id="sc-slider-0" min="0" max="60" value="0" step="1" oninput="handleSliderInput(0)">
-            <div class="range-ends"><span>0 portions</span><span id="sc-max-0">60 (batch max)</span></div>
-          </div>
-          <div class="sc-tier-row" id="sc-row-1">
-            <div class="sc-tier-meta">
-              <span class="sc-tier-name m">Medium</span>
-              <span class="sc-tier-price" id="sc-tp-1">GHS 0 / serving</span>
-            </div>
-            <div class="sc-tier-qty-row">
-              <div class="sc-tier-qty"><span id="sc-qty-1">0</span> <small>portions</small></div>
-              <div class="sc-tier-rev">Revenue<strong id="sc-rev-1">GHS 0</strong></div>
-            </div>
-            <input type="range" id="sc-slider-1" min="0" max="60" value="0" step="1" oninput="handleSliderInput(1)">
-            <div class="range-ends"><span>0 portions</span><span id="sc-max-1">60 (batch max)</span></div>
-          </div>
-          <div class="sc-tier-row" id="sc-row-2">
-            <div class="sc-tier-meta">
-              <span class="sc-tier-name l">Large</span>
-              <span class="sc-tier-price" id="sc-tp-2">GHS 0 / serving</span>
-            </div>
-            <div class="sc-tier-qty-row">
-              <div class="sc-tier-qty"><span id="sc-qty-2">0</span> <small>portions</small></div>
-              <div class="sc-tier-rev">Revenue<strong id="sc-rev-2">GHS 0</strong></div>
-            </div>
-            <input type="range" id="sc-slider-2" min="0" max="60" value="0" step="1" oninput="handleSliderInput(2)">
-            <div class="range-ends"><span>0 portions</span><span id="sc-max-2">60 (batch max)</span></div>
-          </div>
-        </div>
-        <div class="be-marker" id="sc-be-marker"></div>
-        <div class="sc-summary">
-          <div class="sc-sum-row"><span>Total portions</span><span id="sc-sum-qty">0</span></div>
-          <div class="sc-sum-row"><span>Total revenue</span><span id="sc-sum-rev">GHS 0</span></div>
-          <div class="sc-sum-row"><span>Batch cost</span><span id="sc-sum-cost">GHS 0</span></div>
-          <div class="sc-sum-row big" id="sc-sum-pl-row"><span>Net result</span><span id="sc-sum-pl">—</span></div>
-        </div>
-      </div>
+      
+      <button class="btn btn-ghost" id="run-scenarios-btn" onclick="openWhatIf()" style="margin: 16px 0; display: none;">📊 Run 'What If' Scenarios</button>
+
       <div class="result-ctx" id="r-ctx"></div>
       <div class="result-pills" id="r-pills"></div>
       <div class="breakdown" id="r-breakdown"></div>
@@ -726,7 +671,7 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
     </div>
   </div>
 </div>
-<!-- ══════ TAB 2: SALES LOG (2-tap) ══════ -->
+
 <div id="tab-2" class="tab">
   <h1 class="pg-title">Record <em>Sales</em></h1>
   <p class="pg-sub">Tap + to count each portion sold. That's it.</p>
@@ -798,16 +743,22 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
     </div>
     <button class="btn btn-g" onclick="logSale()">Record This Sale</button>
   </div>
-  <div id="sales-list"></div>
-</div>
-<!-- ══════ TAB 3: HISTORY ══════ -->
+  </div>
+
 <div id="tab-3" class="tab">
-  <h1 class="pg-title">Price <em>History</em></h1>
-  <p class="pg-sub">All your saved dish calculations, at a glance.</p>
-  <div id="hist-list"></div>
+  <h1 class="pg-title">Your <em>Ledger</em></h1>
+  
+  <div style="display:flex; background:var(--s2); border-radius:12px; padding:4px; margin-bottom:16px;">
+    <button id="tog-sales" class="btn-ghost" style="flex:1; border:none; background:var(--s3); border-radius:8px; padding:8px; font-weight:600; font-size:13px; color:var(--text)" onclick="switchLedger('sales')">Sales Log</button>
+    <button id="tog-plans" class="btn-ghost" style="flex:1; border:none; background:transparent; border-radius:8px; padding:8px; font-weight:600; font-size:13px; color:var(--sub)" onclick="switchLedger('plans')">Saved Plans</button>
+  </div>
+
+  <div id="sales-list-container"></div>
+  <div id="saved-plans-container" style="display:none;"></div>
 </div>
+
 </main>
-<!-- BOTTOM NAV + SETTINGS SHEET (unchanged) -->
+
 <nav class="bnav">
   <div class="bnav-in">
     <button class="nav-btn on" id="nav-0" onclick="navigate(0)">
@@ -828,10 +779,82 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
     <button class="nav-btn" id="nav-3" onclick="navigate(3)">
       <div class="nav-bar"></div>
       <svg viewBox="0 0 20 20" fill="currentColor"><path d="M4 4h12a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1zm1 3v1.5h10V7H5zm0 3v1.5h10V10H5zm0 3v1.5h7V13H5z"/></svg>
-      <span>History</span>
+      <span>Ledger</span>
     </button>
   </div>
 </nav>
+
+<div class="backdrop" id="whatif-bd" onclick="if(event.target===this)closeWhatIf()">
+  <div class="sheet" style="padding-top: 24px;" onclick="event.stopPropagation()">
+    <div class="sheet-handle"></div>
+    <div class="scenario-hd">
+      <div class="sc-badge">
+        <svg width="10" height="10" viewBox="0 0 12 12" fill="var(--green)"><path d="M6 1C3.24 1 1 3.24 1 6s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm.5 7.5h-1v-4h1v4zm0-5.5h-1V2h1v1z"/></svg>
+        <span id="sc-badge-text">What If?</span>
+      </div>
+      <div class="sc-close" onclick="closeWhatIf()">✕</div>
+    </div>
+    
+    <div class="pl-display">
+      <div class="pl-label" id="sc-pl-label">Your estimated profit</div>
+      <div class="pl-amount profit" id="sc-pl-amount">—</div>
+      <div class="pl-meta" id="sc-pl-meta">Slide the portions below to see your outcome</div>
+    </div>
+    <div class="health-bar-wrap">
+      <div class="health-bar-label" id="health-label">Profit health</div>
+      <div class="health-track"><div class="health-fill" id="health-fill" style="width:0%;background:var(--green)"></div></div>
+    </div>
+    
+    <div class="sc-tiers">
+      <div class="sc-tier-row" id="sc-row-0">
+        <div class="sc-tier-meta">
+          <span class="sc-tier-name s">Small</span>
+          <span class="sc-tier-price" id="sc-tp-0">GHS 0 / serving</span>
+        </div>
+        <div class="sc-tier-qty-row">
+          <div class="sc-tier-qty"><span id="sc-qty-0">0</span> <small>portions</small></div>
+          <div class="sc-tier-rev">Revenue<strong id="sc-rev-0">GHS 0</strong></div>
+        </div>
+        <input type="range" id="sc-slider-0" min="0" max="60" value="0" step="1" oninput="handleSliderInput(0)">
+        <div class="range-ends"><span>0 portions</span><span id="sc-max-0">60 (batch max)</span></div>
+      </div>
+      <div class="sc-tier-row" id="sc-row-1">
+        <div class="sc-tier-meta">
+          <span class="sc-tier-name m">Medium</span>
+          <span class="sc-tier-price" id="sc-tp-1">GHS 0 / serving</span>
+        </div>
+        <div class="sc-tier-qty-row">
+          <div class="sc-tier-qty"><span id="sc-qty-1">0</span> <small>portions</small></div>
+          <div class="sc-tier-rev">Revenue<strong id="sc-rev-1">GHS 0</strong></div>
+        </div>
+        <input type="range" id="sc-slider-1" min="0" max="60" value="0" step="1" oninput="handleSliderInput(1)">
+        <div class="range-ends"><span>0 portions</span><span id="sc-max-1">60 (batch max)</span></div>
+      </div>
+      <div class="sc-tier-row" id="sc-row-2">
+        <div class="sc-tier-meta">
+          <span class="sc-tier-name l">Large</span>
+          <span class="sc-tier-price" id="sc-tp-2">GHS 0 / serving</span>
+        </div>
+        <div class="sc-tier-qty-row">
+          <div class="sc-tier-qty"><span id="sc-qty-2">0</span> <small>portions</small></div>
+          <div class="sc-tier-rev">Revenue<strong id="sc-rev-2">GHS 0</strong></div>
+        </div>
+        <input type="range" id="sc-slider-2" min="0" max="60" value="0" step="1" oninput="handleSliderInput(2)">
+        <div class="range-ends"><span>0 portions</span><span id="sc-max-2">60 (batch max)</span></div>
+      </div>
+    </div>
+    
+    <div class="be-marker" id="sc-be-marker"></div>
+    <div class="sc-summary" style="margin-bottom:20px;">
+      <div class="sc-sum-row"><span>Total portions</span><span id="sc-sum-qty">0</span></div>
+      <div class="sc-sum-row"><span>Total revenue</span><span id="sc-sum-rev">GHS 0</span></div>
+      <div class="sc-sum-row"><span>Batch cost</span><span id="sc-sum-cost">GHS 0</span></div>
+      <div class="sc-sum-row big" id="sc-sum-pl-row"><span>Net result</span><span id="sc-sum-pl">—</span></div>
+    </div>
+    <button class="btn btn-ghost" onclick="closeWhatIf()">Close</button>
+  </div>
+</div>
+
 <div class="backdrop" id="settings-bd" onclick="if(event.target===this)closeSettings()">
   <div class="sheet" onclick="event.stopPropagation()">
     <div class="sheet-handle"></div>
@@ -856,7 +879,7 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
 // ══════════════════════════════════════
 const DEFAULTS=["Buy market ingredients","Gas canister full (GHS 300)","Helpers confirmed","Packaging ready","Phone charged for orders","Kitchen cleaned & prepped"];
 let sales=[],history=[],items=[],checked=new Set(),expenses=[];
-let calcState=null,selectedTier=-1;
+let calcState=null;
 const lgQty=[0,0,0];
 let currentBaseCOGS=0;
 const TIER_MULTS=[1,1.6,2.2];
@@ -881,7 +904,7 @@ window.onload=()=>{
   setGreeting();
   renderChecklist();
   renderExpenseList();
-  setupExpenseDrag();                    // ← WORLD-CLASS ADDITION: Drag & drop for expenses
+  setupExpenseDrag();
   refreshDash();
   document.getElementById('margin-slider').addEventListener('input',e=>{
     const v=e.target.value;
@@ -894,24 +917,31 @@ function defaultExpenses(){
 
 // ══════════════════════════════════════
 // NAVIGATION + GREETING + DASHBOARD + CHECKLIST
-// (all original functions 100% unchanged)
 // ══════════════════════════════════════
-function navigate(t){ /* original code */ 
+function navigate(t){
   document.querySelectorAll('.tab').forEach((d,i)=>d.classList.toggle('active',i===t));
   document.querySelectorAll('.nav-btn').forEach((b,i)=>b.classList.toggle('on',i===t));
   if(t===0){refreshDash();renderChecklist();}
-  if(t===2){renderSales();renderSalesTotals();prefillSalePrices();}
-  if(t===3)renderHistory();
+  if(t===2){renderSalesTotals();prefillSalePrices();}
+  if(t===3){renderSales();renderHistory();} // Ensure Ledger data is fresh
   window.scrollTo({top:0,behavior:'smooth'});
 }
-function setGreeting(){ /* original */ 
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function setGreeting(){
   const h=new Date().getHours();
   const g=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
   document.getElementById('home-title').innerHTML=`${g},<br><em>Tasalla.</em>`;
   const subs=['Ready to cook up a great weekend?','Your kitchen, your profit.',"Let's make every plate count.",'Price right. Cook well. Profit more.','Every portion counts — let\'s go.'];
   document.getElementById('home-sub').textContent=subs[new Date().getDay()%subs.length];
 }
-function refreshDash(){ /* original */ 
+function refreshDash(){
   const income=sales.reduce((s,x)=>s+(x.revenue||0),0);
   const costs=sales.reduce((s,x)=>s+(x.costs||0),0);
   const profit=income-costs;
@@ -925,7 +955,7 @@ function refreshDash(){ /* original */
     ps.querySelector('.stat-lbl').style.color=profit<0?'var(--red)':'var(--green)';
   }
 }
-function animNum(id,target){ /* original */ 
+function animNum(id,target){
   const el=document.getElementById(id);
   const dur=650,t0=performance.now();
   const step=now=>{
@@ -936,7 +966,7 @@ function animNum(id,target){ /* original */
   };
   requestAnimationFrame(step);
 }
-function renderChecklist(){ /* original */ 
+function renderChecklist(){
   const list=document.getElementById('cl-list');
   list.innerHTML=items.map((item,i)=>{
     const done=checked.has(i);
@@ -948,27 +978,27 @@ function renderChecklist(){ /* original */
   }).join('');
   updateProgress();
 }
-function toggleCheck(i){ /* original */ 
+function toggleCheck(i){
   if(checked.has(i))checked.delete(i);else checked.add(i);
   save('ca2_checked',[...checked]);renderChecklist();
 }
-function addCheckItem(){ /* original */ 
+function addCheckItem(){
   const name=prompt('New prep item:');
   if(!name||!name.trim())return;
   items.push(name.trim());save('ca2_items',items);renderChecklist();
 }
-function delCheckItem(i){ /* original */ 
+function delCheckItem(i){
   items.splice(i,1);
   const nc=new Set();
   checked.forEach(c=>{if(c<i)nc.add(c);else if(c>i)nc.add(c-1)});
   checked=nc;save('ca2_items',items);save('ca2_checked',[...checked]);renderChecklist();
 }
-function resetChecklist(){ /* original */ 
+function resetChecklist(){
   if(!confirm('Reset checklist to defaults?'))return;
   items=[...DEFAULTS];checked=new Set();
   save('ca2_items',items);save('ca2_checked',[]);renderChecklist();
 }
-function updateProgress(){ /* original */ 
+function updateProgress(){
   const total=items.length,done=checked.size;
   const pct=total?Math.round((done/total)*100):0;
   document.getElementById('prog-lbl').textContent=`${done} of ${total} done`;
@@ -977,7 +1007,7 @@ function updateProgress(){ /* original */
 }
 
 // ══════════════════════════════════════
-// EXPENSES + DRAG & DROP (NEW WORLD-CLASS FEATURE)
+// EXPENSES + DRAG & DROP
 // ══════════════════════════════════════
 function renderExpenseList(){
   const c=document.getElementById('expense-list');
@@ -994,12 +1024,9 @@ function addExpense(){
 function removeExpense(i){expenses.splice(i,1);saveExpenses();renderExpenseList();}
 function saveExpenses(){save('ca2_expenses',expenses);}
 
-// ==================== WORLD-CLASS IMPROVEMENT #1 ====================
-// Drag & Drop reordering for expenses (premium feel, works on mobile)
 function setupExpenseDrag(){
   const list = document.getElementById('expense-list');
   if(!list) return;
-
   list.addEventListener('dragstart', e => {
     const item = e.target.closest('.expense-item');
     if(!item) return;
@@ -1008,23 +1035,19 @@ function setupExpenseDrag(){
     e.dataTransfer.setData('text/plain', index);
     e.dataTransfer.effectAllowed = 'move';
   });
-
   list.addEventListener('dragend', e => {
     const item = e.target.closest('.expense-item');
     if(item) item.classList.remove('dragging');
   });
-
   list.addEventListener('dragover', e => {
     e.preventDefault();
     const item = e.target.closest('.expense-item');
     if(item) item.style.border = `2px dashed var(--green)`;
   });
-
   list.addEventListener('dragleave', e => {
     const item = e.target.closest('.expense-item');
     if(item) item.style.border = '';
   });
-
   list.addEventListener('drop', e => {
     e.preventDefault();
     const listEl = e.currentTarget;
@@ -1042,12 +1065,17 @@ function setupExpenseDrag(){
 }
 
 // ══════════════════════════════════════
-// PRICE CALCULATOR + AUTO-UPDATE TO SALES TAB
+// PRICE CALCULATOR
 // ══════════════════════════════════════
 function calcPrice(){
   const name=document.getElementById('p-name').value.trim()||'Untitled Dish';
   const portions=Math.max(parseFloat(document.getElementById('p-portions').value)||1,1);
-  const sellEst=Math.max(parseFloat(document.getElementById('p-sellest').value)||portions,1);
+  
+  // FIX: Clamp expected sales so it never exceeds batch size
+  let inputSellEst = parseFloat(document.getElementById('p-sellest').value) || portions;
+  const sellEst = Math.min(Math.max(inputSellEst, 1), portions); 
+  document.getElementById('p-sellest').value = sellEst; // Update UI to clamped value
+
   const margin=parseFloat(document.getElementById('margin-slider').value)/100;
   const totalCost=expenses.reduce((s,e)=>s+(parseFloat(e.amount)||0),0);
   const cpp=totalCost/portions;
@@ -1066,19 +1094,15 @@ function calcPrice(){
   currentBaseCOGS=cpp;
   save('ca2_cogs',currentBaseCOGS);
   calcState={totalCost,portions,tierPrices,sellEst,name,margin};
-  selectedTier=-1;
 
   document.getElementById('r-lbl').textContent=`Your Prices · ${name}`;
   document.getElementById('r-tier-grid').innerHTML=tierPrices.map((t,i)=>`
-    <div class="tier${i===1?' hi':''}" id="tc-${i}" onclick="selectTier(${i})">
+    <div class="tier${i===1?' hi':''}">
       <div class="tier-name">${t.label}</div>
       <div class="tier-price">GHS ${t.price}</div>
-      <div class="tier-unit">per serving</div>
-      <div class="tier-row">Your cost<strong>GHS ${fmt(t.cost)}</strong></div>
-      <div class="tier-tap">What If? ↓</div>
+      <div class="tier-unit">cost GHS ${fmt(t.cost)}</div>
     </div>`).join('');
 
-  document.getElementById('scenario-panel').classList.remove('show');
   const midProfit=tierPrices[1].price*sellEst-totalCost;
   document.getElementById('r-ctx').textContent=`${Math.round(margin*100)}% margin · batch of ${portions} · GHS ${fmt(totalCost)} total cost`;
   document.getElementById('r-pills').innerHTML=`
@@ -1089,61 +1113,49 @@ function calcPrice(){
   document.getElementById('r-breakdown').innerHTML=
     expenses.map(e=>`<div class="brow"><span>${e.name||'Cost'}</span><span>GHS ${fmt(e.amount)}</span></div>`).join('')+
     `<div class="brow total"><span>Total batch cost</span><span>GHS ${fmt(totalCost)}</span></div>`;
-
+  
   document.getElementById('r-save-btn').onclick=()=>
     savePlan(name,portions,sellEst,totalCost,margin,tierPrices,midProfit,[...expenses]);
 
   document.getElementById('price-result').style.display='block';
-
-  // ==================== WORLD-CLASS IMPROVEMENT #2 ====================
-  // Auto-update suggested prices to the Sales tab instantly
+  document.getElementById('run-scenarios-btn').style.display='block';
+  
   prefillSalePrices();
-
   setTimeout(()=>document.getElementById('price-result').scrollIntoView({behavior:'smooth',block:'nearest'}),80);
 }
 
-// (All remaining original functions — selectTier, closeScenario, fillSlider, handleSliderInput, updateMultiScenario, stepQty, updateLogPreview, logSale, deleteSale, renderSalesTotals, renderSales, savePlan, renderHistory, toggleHist, deleteHistory, openSettings, closeSettings, toggleTheme, updateThemeUI, clearAllData — are kept 100% identical to your original code)
-
-function selectTier(idx){ /* original full code */ 
-  if(!calcState)return;
-  selectedTier=idx;
-  [0,1,2].forEach(i=>{
-    const el=document.getElementById(`tc-${i}`);
-    el.classList.remove('selected');
-    if(i!==1)el.classList.remove('hi');
-    if(i===1&&i!==idx)el.classList.add('hi');
+// ══════════════════════════════════════
+// WHAT IF? BOTTOM SHEET SCENARIOS
+// ══════════════════════════════════════
+function openWhatIf() {
+  if(!calcState) return;
+  document.getElementById('whatif-bd').classList.add('show');
+  
+  const maxQty = calcState.portions;
+  const seed = calcState.sellEst;
+  
+  calcState.tierPrices.forEach((t, i) => {
+      document.getElementById(`sc-tp-${i}`).textContent = `GHS ${t.price} / serving`;
+      const sl = document.getElementById(`sc-slider-${i}`);
+      sl.max = maxQty;
+      document.getElementById(`sc-max-${i}`).textContent = `${maxQty} (batch max)`;
+      sl.value = (i === 1) ? seed : 0; // Default scenario puts all est sales in Medium
   });
-  document.getElementById(`tc-${idx}`).classList.add('selected');
-  const maxQty=calcState.portions;
-  const seedMain=Math.min(Math.round(calcState.sellEst*0.6),maxQty);
-  const seedOther=Math.min(Math.round(calcState.sellEst*0.2),Math.floor((maxQty-seedMain)/2));
-  calcState.tierPrices.forEach((t,i)=>{
-    document.getElementById(`sc-tp-${i}`).textContent=`GHS ${t.price} / serving`;
-    const sl=document.getElementById(`sc-slider-${i}`);
-    sl.max=maxQty;
-    document.getElementById(`sc-max-${i}`).textContent=`${maxQty} (batch max)`;
-    sl.value=i===idx?seedMain:seedOther;
-  });
-  document.getElementById('sc-badge-text').textContent='What If? · Move the sliders';
-  document.getElementById('scenario-panel').classList.add('show');
-  [0,1,2].forEach(i=>fillSlider(document.getElementById(`sc-slider-${i}`)));
+  
+  [0, 1, 2].forEach(i => fillSlider(document.getElementById(`sc-slider-${i}`)));
   updateMultiScenario();
-  setTimeout(()=>document.getElementById('scenario-panel').scrollIntoView({behavior:'smooth',block:'nearest'}),80);
 }
-function closeScenario(){ /* original */ 
-  document.getElementById('scenario-panel').classList.remove('show');
-  selectedTier=-1;
-  [0,1,2].forEach(i=>{
-    const el=document.getElementById(`tc-${i}`);
-    el.classList.remove('selected');
-    if(i===1)el.classList.add('hi');
-  });
+
+function closeWhatIf(){
+  document.getElementById('whatif-bd').classList.remove('show');
 }
-function fillSlider(sl){ /* original */ 
+
+function fillSlider(sl){
   const pct=(sl.value/sl.max)*100;
   sl.style.background=`linear-gradient(to right,var(--green) ${pct}%,var(--s3) ${pct}%)`;
 }
-function handleSliderInput(idx){ /* original */ 
+
+function handleSliderInput(idx){
   if(!calcState)return;
   const batchMax=calcState.portions;
   const sliders=[0,1,2].map(i=>document.getElementById(`sc-slider-${i}`));
@@ -1152,12 +1164,14 @@ function handleSliderInput(idx){ /* original */
   if(+sliders[idx].value>allowed)sliders[idx].value=allowed;
   updateMultiScenario();
 }
-function updateMultiScenario(){ /* original full code */ 
+
+function updateMultiScenario(){
   if(!calcState)return;
   const batchMax=calcState.portions;
   const sliders=[0,1,2].map(i=>document.getElementById(`sc-slider-${i}`));
   const qtys=sliders.map(sl=>Math.round(+sl.value||0));
   const usedTotal=qtys.reduce((a,b)=>a+b,0);
+  
   sliders.forEach((sl,i)=>{
     fillSlider(sl);
     const othersSum=qtys.reduce((s,v,j)=>j!==i?s+v:s,0);
@@ -1167,6 +1181,7 @@ function updateMultiScenario(){ /* original full code */
     document.getElementById(`sc-max-${i}`).textContent=
       leftover<=0?'Batch full':remaining===batchMax?`${batchMax} (batch max)`:`${remaining} left`;
   });
+  
   const tiers=calcState.tierPrices;
   let totalRev=0;
   qtys.forEach((q,i)=>{
@@ -1177,16 +1192,17 @@ function updateMultiScenario(){ /* original full code */
     const rowCls=['active-s','active-m','active-l'];
     document.getElementById(`sc-row-${i}`).classList.toggle(rowCls[i],q>0);
   });
+  
   const totalQty=qtys.reduce((a,b)=>a+b,0);
   const prf=totalRev-calcState.totalCost;
   const mPct=totalRev>0?((prf/totalRev)*100).toFixed(1):'0';
   const plEl=document.getElementById('sc-pl-amount');
   const lbEl=document.getElementById('sc-pl-label');
   const metaEl=document.getElementById('sc-pl-meta');
-  const avgPrice=totalQty>0?totalRev/totalQty:0;
   const beRemaining=calcState.totalCost-totalRev;
   const hFill=document.getElementById('health-fill');
   const hLabel=document.getElementById('health-label');
+  
   if(totalQty===0){
     hFill.style.width='0%';hFill.style.background='var(--dim)';
     hLabel.textContent='No portions set yet';
@@ -1204,6 +1220,7 @@ function updateMultiScenario(){ /* original full code */
     hFill.style.background='var(--green)';
     hLabel.textContent=`Profit health: ${mPct}% margin`;
   }
+  
   if(totalQty===0){
     plEl.textContent='—';plEl.className='pl-amount';
     lbEl.textContent='Your estimated result';
@@ -1221,6 +1238,7 @@ function updateMultiScenario(){ /* original full code */
     lbEl.textContent='You\'re in the red';
     metaEl.innerHTML=`Short by <strong>GHS ${fmt(Math.abs(prf))}</strong> · Revenue <strong>GHS ${fmt(totalRev)}</strong>`;
   }
+  
   const beEl=document.getElementById('sc-be-marker');
   if(totalQty===0){
     beEl.textContent='';beEl.className='be-marker';
@@ -1231,6 +1249,7 @@ function updateMultiScenario(){ /* original full code */
   } else {
     beEl.textContent=`✓ Costs covered — GHS ${fmt(Math.abs(beRemaining))} above break-even`;beEl.className='be-marker ok';
   }
+  
   document.getElementById('sc-sum-qty').textContent=totalQty+' portions';
   document.getElementById('sc-sum-rev').textContent=`GHS ${fmt(totalRev)}`;
   document.getElementById('sc-sum-cost').textContent=`GHS ${fmt(calcState.totalCost)}`;
@@ -1241,7 +1260,11 @@ function updateMultiScenario(){ /* original full code */
   else if(prf<0){plVal.textContent=`−GHS ${fmt(Math.abs(prf))}`;plRow.className='sc-sum-row big loss-row';}
   else{plVal.textContent='Break even';plRow.className='sc-sum-row big be-row';}
 }
-function stepQty(tier,delta){ /* original */ 
+
+// ══════════════════════════════════════
+// RECORD SALES & LEDGER
+// ══════════════════════════════════════
+function stepQty(tier,delta){
   lgQty[tier]=Math.max(0,lgQty[tier]+delta);
   const disp=document.getElementById(`lg-q${tier}-disp`);
   disp.textContent=lgQty[tier];
@@ -1249,7 +1272,8 @@ function stepQty(tier,delta){ /* original */
   document.getElementById(`qt-row-${tier}`).classList.toggle('active',lgQty[tier]>0);
   updateLogPreview();
 }
-function updateLogPreview(){ /* original */ 
+
+function updateLogPreview(){
   const tiers=[0,1,2].map(i=>({
     price:parseFloat(document.getElementById(`lg-p${i}`).value)||0,
     qty:lgQty[i],
@@ -1268,16 +1292,16 @@ function updateLogPreview(){ /* original */
   else{pEl.textContent=`−GHS ${fmt(Math.abs(prf))} loss`;pEl.style.color='var(--red)';}
   el.classList.add('show');
 }
-// ==================== WORLD-CLASS IMPROVEMENT #2 (continued) ====================
-// Always push the latest suggested prices into Sales tab (auto-update)
+
 function prefillSalePrices(){
   if(!calcState) return;
   calcState.tierPrices.forEach((t,i)=>{
     const inp=document.getElementById(`lg-p${i}`);
-    if(inp) inp.value = t.price;   // always update (this is the auto-update you asked for)
+    if(inp) inp.value = t.price;
   });
 }
-function logSale(){ /* original */ 
+
+function logSale(){
   const dish=document.getElementById('lg-dish').value.trim()||'Unnamed Dish';
   const manualCosts=parseFloat(document.getElementById('lg-costs').value)||0;
   const LABELS=['Small','Medium','Large'];
@@ -1287,12 +1311,16 @@ function logSale(){ /* original */
     qty:lgQty[i],
     cogsFraction:TIER_MULTS[i]*currentBaseCOGS*lgQty[i]
   })).filter(t=>t.qty>0);
+  
   if(!tiers.length){alert('Add at least one portion sold.');return;}
+  
   const revenue=tiers.reduce((s,t)=>s+t.price*t.qty,0);
   const allocatedCost=manualCosts>0?manualCosts:tiers.reduce((s,t)=>s+t.cogsFraction,0);
   const profit=revenue-allocatedCost;
+  
   sales.unshift({id:Date.now(),date:new Date().toLocaleDateString('en-GB'),dish,costs:allocatedCost,revenue,profit,tiers});
   save('ca2_sales',sales);
+  
   document.getElementById('lg-dish').value='';
   document.getElementById('lg-costs').value='';
   [0,1,2].forEach(i=>{
@@ -1302,14 +1330,23 @@ function logSale(){ /* original */
     document.getElementById(`lg-q${i}-disp`).className='qt-count';
     document.getElementById(`qt-row-${i}`).classList.remove('active');
   });
+  
   document.getElementById('lg-preview').classList.remove('show');
-  renderSales();renderSalesTotals();refreshDash();
+  
+  // Show clean success toast instead of long history list here
+  showToast('Sale logged successfully!');
+  
+  renderSales();
+  renderSalesTotals();
+  refreshDash();
 }
-function deleteSale(id){ /* original */ 
+
+function deleteSale(id){
   sales=sales.filter(s=>s.id!==id);save('ca2_sales',sales);
   renderSales();renderSalesTotals();refreshDash();
 }
-function renderSalesTotals(){ /* original */ 
+
+function renderSalesTotals(){
   const income=sales.reduce((s,x)=>s+(x.revenue||0),0);
   const costs=sales.reduce((s,x)=>s+(x.costs||0),0);
   const profit=income-costs;
@@ -1319,10 +1356,11 @@ function renderSalesTotals(){ /* original */
   pEl.textContent='GHS '+fmt(profit);
   pEl.style.color=profit>=0?'var(--green)':'var(--red)';
 }
-function renderSales(){ /* original */ 
-  const c=document.getElementById('sales-list');
+
+function renderSales(){
+  const c=document.getElementById('sales-list-container');
   if(!sales.length){
-    c.innerHTML=`<div class="empty"><div class="empty-icon">🧾</div>No sales logged yet.<br>Use the form above after you cook!</div>`;
+    c.innerHTML=`<div class="empty"><div class="empty-icon">🧾</div>No sales logged yet.<br>Go to the Sales tab to log your first sale!</div>`;
     return;
   }
   c.innerHTML=sales.map(s=>{
@@ -1359,17 +1397,47 @@ function renderSales(){ /* original */
     </div>`;
   }).join('');
 }
-function savePlan(name,portions,sellEst,totalCost,margin,tierPrices,profit,expSnap){ /* original */ 
+
+// ══════════════════════════════════════
+// UNIFIED LEDGER TOGGLE (TAB 3)
+// ══════════════════════════════════════
+function switchLedger(tab) {
+  const btnS = document.getElementById('tog-sales');
+  const btnP = document.getElementById('tog-plans');
+  const conS = document.getElementById('sales-list-container');
+  const conP = document.getElementById('saved-plans-container');
+  
+  if (tab === 'sales') {
+      btnS.style.background = 'var(--s3)'; btnS.style.color = 'var(--text)';
+      btnP.style.background = 'transparent'; btnP.style.color = 'var(--sub)';
+      conS.style.display = 'block'; conP.style.display = 'none';
+      renderSales();
+  } else {
+      btnP.style.background = 'var(--s3)'; btnP.style.color = 'var(--text)';
+      btnS.style.background = 'transparent'; btnS.style.color = 'var(--sub)';
+      conP.style.display = 'block'; conS.style.display = 'none';
+      renderHistory();
+  }
+}
+
+// ══════════════════════════════════════
+// SAVED PLANS (HISTORY)
+// ══════════════════════════════════════
+function savePlan(name,portions,sellEst,totalCost,margin,tierPrices,profit,expSnap){
   history.unshift({
     id:Date.now(),date:new Date().toLocaleDateString('en-GB'),
     name,portions,sellEst,totalCost,margin,tierPrices,
     sellPrice:tierPrices[1].price,profit,expenses:expSnap
   });
   save('ca2_history',history);
-  navigate(3);
+  
+  showToast('Plan saved to Ledger!');
+  // Update ledger but don't force jump
+  renderHistory();
 }
-function renderHistory(){ /* original */ 
-  const c=document.getElementById('hist-list');
+
+function renderHistory(){
+  const c=document.getElementById('saved-plans-container');
   if(!history.length){
     c.innerHTML=`<div class="empty"><div class="empty-icon">📊</div>No saved plans yet.<br>Calculate a price and tap "Save This Plan".</div>`;
     return;
@@ -1417,6 +1485,10 @@ function renderHistory(){ /* original */
 }
 function toggleHist(i){document.getElementById(`hc-${i}`).classList.toggle('open');}
 function deleteHistory(id){history=history.filter(h=>h.id!==id);save('ca2_history',history);renderHistory();}
+
+// ══════════════════════════════════════
+// SETTINGS
+// ══════════════════════════════════════
 function openSettings(){document.getElementById('settings-bd').classList.add('show');}
 function closeSettings(){document.getElementById('settings-bd').classList.remove('show');}
 function toggleTheme(){
