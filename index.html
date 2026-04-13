@@ -11,27 +11,27 @@
    DESIGN TOKENS
 ══════════════════════════════════════ */
 :root {
-  --bg: #080808;
+  --bg: #000000; /* Deepened for stronger contrast */
   --s1: rgba(255,255,255,0.036);
   --s2: rgba(255,255,255,0.058);
   --s3: rgba(255,255,255,0.09);
   --s-solid: #141414;
   --s2-solid: #1c1c1c;
-  --bd: rgba(255,255,255,0.07);
-  --bd2: rgba(255,255,255,0.12);
-  --text: #f0f0f0;
-  --sub: #888;
-  --dim: #444;
+  --bd: rgba(255,255,255,0.09); /* Slightly more visible borders */
+  --bd2: rgba(255,255,255,0.15);
+  --text: #ffffff; /* Brighter text */
+  --sub: #999;
+  --dim: #555;
   --green: #1df58a;
-  --g-dim: rgba(29,245,138,0.1);
-  --g-bd: rgba(29,245,138,0.28);
-  --g-glow: rgba(29,245,138,0.22);
+  --g-dim: rgba(29,245,138,0.12);
+  --g-bd: rgba(29,245,138,0.35);
+  --g-glow: rgba(29,245,138,0.25);
   --amber: #f7b731;
-  --a-dim: rgba(247,183,49,0.1);
-  --a-bd: rgba(247,183,49,0.28);
+  --a-dim: rgba(247,183,49,0.12);
+  --a-bd: rgba(247,183,49,0.35);
   --red: #ff4757;
-  --r-dim: rgba(255,71,87,0.1);
-  --r-bd: rgba(255,71,87,0.28);
+  --r-dim: rgba(255,71,87,0.12);
+  --r-bd: rgba(255,71,87,0.35);
   --r: 16px; --rsm: 12px; --rlg: 22px;
 }
 [data-theme="light"] {
@@ -64,7 +64,6 @@ body{
   padding-bottom:96px;
   overflow-x:hidden;
 }
-[data-theme="dark"] body{background:#080808}
 
 /* ══════════════════════════════════════
    TOAST NOTIFICATION
@@ -83,7 +82,7 @@ body{
 ══════════════════════════════════════ */
 .hdr{
   position:sticky;top:0;z-index:400;
-  background:rgba(8,8,8,0.85);
+  background:rgba(0,0,0,0.85);
   backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
   border-bottom:1px solid var(--bd);
 }
@@ -407,7 +406,7 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
   background:rgba(0,0,0,0.2);
   border:1px solid var(--bd);border-radius:var(--rsm);
   padding:12px 13px;
-  transition:border-color 0.2s;
+  transition:border-color 0.2s, background 0.2s;
 }
 [data-theme="light"] .qt-row{background:var(--s2)}
 .qt-row.active{border-color:var(--g-bd)}
@@ -474,8 +473,12 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
 .sale-tier-row{display:flex;justify-content:space-between;font-size:12px}
 .stl{color:var(--sub)}.stv{color:var(--text);font-weight:500}
 .sale-footer{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1px solid var(--bd)}
+
+/* ══════════════════════════════════════
+   CHECKLIST (UPDATED)
+══════════════════════════════════════ */
 .cl-item{
-  display:flex;align-items:center;gap:12px;
+  display:flex;align-items:center;gap:10px;
   background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);
   padding:13px 15px;margin-bottom:7px;
   animation:tabUp 0.25s both;
@@ -483,7 +486,7 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
 }
 [data-theme="light"] .cl-item{background:var(--s-solid)}
 .cl-item.done{background:var(--g-dim);border-color:var(--g-bd)}
-.cl-item.done .cl-text{color:var(--sub);text-decoration:line-through}
+.cl-item.done .cl-text{color:var(--dim);text-decoration:line-through}
 .cl-box{
   width:20px;height:20px;min-width:20px;border:1.5px solid var(--bd2);
   border-radius:6px;background:var(--s2);
@@ -491,13 +494,21 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
   cursor:pointer;transition:all 0.15s;font-size:11px;color:#000;
 }
 .cl-box.on{background:var(--green);border-color:var(--green);box-shadow:0 0 10px var(--g-glow)}
-.cl-text{flex:1;font-size:14px}
+.cl-pri {
+  cursor:pointer; user-select:none; font-size:13px; min-width:18px; text-align:center;
+  transition:transform 0.15s;
+}
+.cl-pri:active { transform:scale(0.8); }
+.cl-text{flex:1;font-size:14px; outline:none; border-bottom:1px dashed transparent; transition:0.2s}
+.cl-text[contenteditable="true"] { cursor:text; }
+.cl-text[contenteditable="true"]:focus { border-bottom-color:var(--green); }
 .cl-del{color:var(--dim);opacity:0.4;cursor:pointer;font-size:12px;padding:4px;transition:opacity 0.2s}
 .cl-del:active{opacity:1;color:var(--red)}
 .prog-row{display:flex;justify-content:space-between;margin:12px 0 6px;font-size:11px}
 .prog-lbl{color:var(--sub)}.prog-pct{font-weight:600;color:var(--green)}
 .prog-track{height:4px;background:var(--s2);border-radius:2px;overflow:hidden}
 .prog-fill{height:100%;background:var(--green);border-radius:2px;transition:width 0.45s cubic-bezier(0.22,1,0.36,1);box-shadow:0 0 8px var(--g-glow)}
+
 .hist-card{
   background:var(--s1);border:1px solid var(--bd);
   border-radius:var(--r);margin-bottom:9px;overflow:hidden;
@@ -532,7 +543,7 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
 ══════════════════════════════════════ */
 .bnav{
   position:fixed;bottom:0;left:0;right:0;z-index:400;
-  background:rgba(8,8,8,0.92);
+  background:rgba(0,0,0,0.92);
   backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
   border-top:1px solid var(--bd);
   padding:8px 0 max(10px,env(safe-area-inset-bottom));
@@ -599,11 +610,11 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
   
   <div class="stats">
     <div class="stat">
-      <div class="stat-lbl">Invested</div>
+      <div class="stat-lbl">Total Revenue</div>
       <div class="stat-num" id="dash-income">GHS 0</div>
     </div>
     <div class="stat is-spent">
-      <div class="stat-lbl">Spent</div>
+      <div class="stat-lbl">Capital Invested</div>
       <div class="stat-num" id="dash-costs">GHS 0</div>
     </div>
     <div class="stat is-profit">
@@ -688,8 +699,8 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
   <p class="pg-sub">Tap + to count each portion sold. That's it.</p>
   
   <div class="sales-summary">
-    <div class="s-sum"><div class="s-sum-lbl">Invested</div><div class="s-sum-num" id="sl-income">GHS 0</div></div>
-    <div class="s-sum"><div class="s-sum-lbl">Spent</div><div class="s-sum-num" id="sl-costs" style="color:var(--amber)">GHS 0</div></div>
+    <div class="s-sum"><div class="s-sum-lbl">Revenue</div><div class="s-sum-num" id="sl-income">GHS 0</div></div>
+    <div class="s-sum"><div class="s-sum-lbl">Invested</div><div class="s-sum-num" id="sl-costs" style="color:var(--amber)">GHS 0</div></div>
     <div class="s-sum"><div class="s-sum-lbl">Net Profit</div><div class="s-sum-num" id="sl-profit" style="color:var(--green)">GHS 0</div></div>
     <div class="s-sum"><div class="s-sum-lbl">Losses</div><div class="s-sum-num" id="sl-loss" style="color:var(--red)">GHS 0</div></div>
   </div>
@@ -741,8 +752,19 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
     </div>
     
     <div class="field" style="margin-bottom:12px; margin-top:8px;">
-      <label class="lbl">Unsold / Wasted Portions <span style="font-size:9px;color:var(--dim);font-weight:400;text-transform:none;letter-spacing:0">(Calculates 100% loss)</span></label>
-      <input class="inp sm" id="lg-waste" type="number" inputmode="numeric" placeholder="Number of unsold portions" oninput="updateLogPreview()">
+      <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+        <label class="lbl" style="margin-bottom:0">Unsold / Wasted Portions</label>
+        <span id="waste-impact" style="font-size:11px; color:var(--red); font-weight:600"></span>
+      </div>
+      <div class="qt-row" id="qt-row-waste" style="background: rgba(255,71,87,0.04); border-color: rgba(255,71,87,0.15);">
+        <div class="qt-label"><div class="qt-label-name" style="color:var(--red)">Waste</div></div>
+        <div class="qt-price-wrap"><div class="qt-price-hint" style="color:var(--red); opacity:0.8">Calculates 100% loss against capital</div></div>
+        <div class="qt-stepper">
+          <button class="qt-step minus" onclick="stepWaste(-1)">−</button>
+          <div class="qt-count" id="lg-waste-disp" style="background:var(--s2)">0</div>
+          <button class="qt-step plus" onclick="stepWaste(1)">+</button>
+        </div>
+      </div>
     </div>
 
     <div class="field" style="margin-bottom:12px">
@@ -802,7 +824,7 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
     <div class="sheet-handle"></div>
     <div class="scenario-hd">
       <div class="sc-badge">
-        <svg width="10" height="10" viewBox="0 0 12 12" fill="var(--green)"><path d="M6 1C3.24 1 1 3.24 1 6s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm.5 7.5h-1v-4h1v4zm0-5.5h-1V2h1v1z"/></svg>
+        <svg width="10" height="10" viewBox="0 0 12 12" fill="var(--green)"><path d="M6 1C3.24 1 1 3.24 1 6s2.24 5 5 5 5-2.24-5-5-2.24-5-5-5zm.5 7.5h-1v-4h1v4zm0-5.5h-1V2h1v1z"/></svg>
         <span id="sc-badge-text">What If?</span>
       </div>
       <div class="sc-close" onclick="closeWhatIf()">✕</div>
@@ -894,6 +916,7 @@ const DEFAULTS=["Buy market ingredients","Gas canister full (GHS 300)","Helpers 
 let sales=[],history=[],items=[],checked=new Set(),expenses=[];
 let calcState=null;
 const lgQty=[0,0,0];
+let wasteQtyVal=0;
 let currentBaseCOGS=0;
 const TIER_MULTS=[1,1.6,2.2];
 const ls=k=>{try{return JSON.parse(localStorage.getItem(k))}catch{return null}};
@@ -906,7 +929,15 @@ const fmt=n=>{if(isNaN(n)||n==null)return'0';const r=Math.round(n*100)/100;retur
 window.onload=()=>{
   sales=ls('ca2_sales')||[];
   history=ls('ca2_history')||[];
-  items=ls('ca2_items')||[...DEFAULTS];
+  
+  // Checklist Migration: Upgrade old strings to priority objects
+  const rawItems = ls('ca2_items');
+  if(!rawItems) {
+    items = DEFAULTS.map(text => ({text, priority: 0}));
+  } else {
+    items = rawItems.map(i => typeof i === 'string' ? {text: i, priority: 0} : i);
+  }
+  
   checked=new Set(ls('ca2_checked')||[]);
   expenses=ls('ca2_expenses')||defaultExpenses();
   currentBaseCOGS=ls('ca2_cogs')||0;
@@ -928,7 +959,7 @@ function defaultExpenses(){
 }
 
 // ══════════════════════════════════════
-// NAVIGATION + GREETING + DASHBOARD + CHECKLIST
+// NAVIGATION + GREETING + DASHBOARD
 // ══════════════════════════════════════
 function navigate(t){
   document.querySelectorAll('.tab').forEach((d,i)=>d.classList.toggle('active',i===t));
@@ -954,7 +985,7 @@ function setGreeting(){
   document.getElementById('home-sub').textContent=subs[new Date().getDay()%subs.length];
 }
 
-// === UPDATED DASHBOARD LOGIC (PROFIT VS LOSS) ===
+// === DASHBOARD STATS (Revenue / Capital / Net) ===
 function refreshDash(){
   const income=sales.reduce((s,x)=>s+(x.revenue||0),0);
   const costs=sales.reduce((s,x)=>s+(x.costs||0),0);
@@ -968,7 +999,6 @@ function refreshDash(){
 
   const ps=document.querySelector('.stat.is-profit') || document.querySelector('.stat.is-loss');
   if(ps){
-    // Dynamically change styling based on overall net health
     ps.className = netProfit >= 0 ? 'stat is-profit' : 'stat is-loss';
     ps.querySelector('.stat-num').style.color=netProfit<0?'var(--red)':'var(--green)';
     ps.querySelector('.stat-lbl').style.color=netProfit<0?'var(--red)':'var(--green)';
@@ -988,26 +1018,42 @@ function animNum(id,target){
   requestAnimationFrame(step);
 }
 
+// ══════════════════════════════════════
+// ENHANCED CHECKLIST
+// ══════════════════════════════════════
 function renderChecklist(){
   const list=document.getElementById('cl-list');
+  const priColors = ['var(--sub)', 'var(--amber)', 'var(--red)'];
+  const priIcons = ['○', '⚡', '🔴'];
+  
   list.innerHTML=items.map((item,i)=>{
     const done=checked.has(i);
+    const pri = item.priority || 0;
     return`<div class="cl-item${done?' done':''}" id="cl-${i}">
       <div class="cl-box${done?' on':''}" onclick="toggleCheck(${i})">${done?'✓':''}</div>
-      <span class="cl-text">${item}</span>
+      <div class="cl-pri" style="color:${priColors[pri]}" onclick="cyclePriority(${i})">${priIcons[pri]}</div>
+      <span class="cl-text" contenteditable="${!done}" onblur="updateCheckText(${i}, this.textContent)">${item.text}</span>
       <span class="cl-del" onclick="delCheckItem(${i})">✕</span>
     </div>`;
   }).join('');
   updateProgress();
+}
+function cyclePriority(i){
+  items[i].priority = ((items[i].priority || 0) + 1) % 3;
+  save('ca2_items',items); renderChecklist();
+}
+function updateCheckText(i, val){
+  if(!val.trim()) return delCheckItem(i);
+  items[i].text = val.trim();
+  save('ca2_items',items);
 }
 function toggleCheck(i){
   if(checked.has(i))checked.delete(i);else checked.add(i);
   save('ca2_checked',[...checked]);renderChecklist();
 }
 function addCheckItem(){
-  const name=prompt('New prep item:');
-  if(!name||!name.trim())return;
-  items.push(name.trim());save('ca2_items',items);renderChecklist();
+  items.push({text: "New task (tap to edit)", priority: 0});
+  save('ca2_items',items); renderChecklist();
 }
 function delCheckItem(i){
   items.splice(i,1);
@@ -1017,7 +1063,8 @@ function delCheckItem(i){
 }
 function resetChecklist(){
   if(!confirm('Reset checklist to defaults?'))return;
-  items=[...DEFAULTS];checked=new Set();
+  items = DEFAULTS.map(text => ({text, priority: 0}));
+  checked=new Set();
   save('ca2_items',items);save('ca2_checked',[]);renderChecklist();
 }
 function updateProgress(){
@@ -1147,7 +1194,6 @@ function calcPrice(){
 function openWhatIf() {
   if(!calcState) return;
   document.getElementById('whatif-bd').classList.add('show');
-  
   const maxQty = calcState.portions;
   const seed = calcState.sellEst;
   calcState.tierPrices.forEach((t, i) => {
@@ -1160,16 +1206,11 @@ function openWhatIf() {
   [0, 1, 2].forEach(i => fillSlider(document.getElementById(`sc-slider-${i}`)));
   updateMultiScenario();
 }
-
-function closeWhatIf(){
-  document.getElementById('whatif-bd').classList.remove('show');
-}
-
+function closeWhatIf(){ document.getElementById('whatif-bd').classList.remove('show'); }
 function fillSlider(sl){
   const pct=(sl.value/sl.max)*100;
   sl.style.background=`linear-gradient(to right,var(--green) ${pct}%,var(--s3) ${pct}%)`;
 }
-
 function handleSliderInput(idx){
   if(!calcState)return;
   const batchMax=calcState.portions;
@@ -1179,7 +1220,6 @@ function handleSliderInput(idx){
   if(+sliders[idx].value>allowed)sliders[idx].value=allowed;
   updateMultiScenario();
 }
-
 function updateMultiScenario(){
   if(!calcState)return;
   const batchMax=calcState.portions;
@@ -1274,7 +1314,7 @@ function updateMultiScenario(){
 }
 
 // ══════════════════════════════════════
-// RECORD SALES & LEDGER (UPDATED LOGIC)
+// RECORD SALES & LEDGER
 // ══════════════════════════════════════
 function stepQty(tier,delta){
   lgQty[tier]=Math.max(0,lgQty[tier]+delta);
@@ -1285,6 +1325,23 @@ function stepQty(tier,delta){
   updateLogPreview();
 }
 
+function stepWaste(delta){
+  wasteQtyVal = Math.max(0, wasteQtyVal + delta);
+  const disp = document.getElementById('lg-waste-disp');
+  disp.textContent = wasteQtyVal;
+  
+  if(wasteQtyVal > 0) {
+    disp.style.background = 'var(--r-dim)';
+    disp.style.color = 'var(--red)';
+    document.getElementById('qt-row-waste').style.borderColor = 'var(--r-bd)';
+  } else {
+    disp.style.background = 'var(--s2)';
+    disp.style.color = 'var(--text)';
+    document.getElementById('qt-row-waste').style.borderColor = 'rgba(255,71,87,0.15)';
+  }
+  updateLogPreview();
+}
+
 function updateLogPreview(){
   const tiers=[0,1,2].map(i=>({
     price:parseFloat(document.getElementById(`lg-p${i}`).value)||0,
@@ -1292,20 +1349,18 @@ function updateLogPreview(){
     cogsFraction:TIER_MULTS[i]*currentBaseCOGS*lgQty[i]
   }));
   const manualCosts=parseFloat(document.getElementById('lg-costs').value)||0;
-  const wasteQty=parseInt(document.getElementById('lg-waste').value)||0;
   
-  // Calculate the cost of the wasted/unsold food
-  const wasteCost = wasteQty * currentBaseCOGS;
+  const wasteCost = wasteQtyVal * currentBaseCOGS;
+  const wImpact = document.getElementById('waste-impact');
+  wImpact.textContent = wasteQtyVal > 0 ? `GHS ${fmt(wasteCost)} loss` : '';
   
   const rev=tiers.reduce((s,t)=>s+t.price*t.qty,0);
-  // Add wasteCost to the total allocated cost
   const allocatedCost=(manualCosts>0?manualCosts:tiers.reduce((s,t)=>s+t.cogsFraction,0)) + wasteCost;
   
   const prf=rev-allocatedCost;
   const el=document.getElementById('lg-preview');
   
-  // Check if there's any valid input across any of the fields to show preview
-  const any=tiers.some(t=>t.price>0||t.qty>0)||manualCosts>0||wasteQty>0;
+  const any=tiers.some(t=>t.price>0||t.qty>0)||manualCosts>0||wasteQtyVal>0;
   if(!any){el.classList.remove('show');return;}
   
   document.getElementById('lg-prev-rev').textContent=`Revenue: GHS ${fmt(rev)}`;
@@ -1326,8 +1381,7 @@ function prefillSalePrices(){
 function logSale(){
   const dish=document.getElementById('lg-dish').value.trim()||'Unnamed Dish';
   const manualCosts=parseFloat(document.getElementById('lg-costs').value)||0;
-  const wasteQty=parseInt(document.getElementById('lg-waste').value)||0;
-  const wasteCost=wasteQty * currentBaseCOGS;
+  const wasteCost=wasteQtyVal * currentBaseCOGS;
 
   const LABELS=['Small','Medium','Large'];
   const tiers=[0,1,2].map(i=>({
@@ -1337,20 +1391,18 @@ function logSale(){
     cogsFraction:TIER_MULTS[i]*currentBaseCOGS*lgQty[i]
   })).filter(t=>t.qty>0);
 
-  if(!tiers.length && wasteQty === 0 && manualCosts === 0){alert('Add portions sold or waste.');return;}
+  if(!tiers.length && wasteQtyVal === 0 && manualCosts === 0){alert('Add portions sold or waste.');return;}
   
   const revenue=tiers.reduce((s,t)=>s+t.price*t.qty,0);
   const allocatedCost=(manualCosts>0?manualCosts:tiers.reduce((s,t)=>s+t.cogsFraction,0)) + wasteCost;
   const profit=revenue-allocatedCost;
   
-  // Include waste details in the history object
-  sales.unshift({id:Date.now(),date:new Date().toLocaleDateString('en-GB'),dish,costs:allocatedCost,revenue,profit,tiers,wasteQty,wasteCost});
+  sales.unshift({id:Date.now(),date:new Date().toLocaleDateString('en-GB'),dish,costs:allocatedCost,revenue,profit,tiers,wasteQty:wasteQtyVal,wasteCost});
   save('ca2_sales',sales);
   
   // Reset form
   document.getElementById('lg-dish').value='';
   document.getElementById('lg-costs').value='';
-  document.getElementById('lg-waste').value='';
   [0,1,2].forEach(i=>{
     document.getElementById(`lg-p${i}`).value='';
     lgQty[i]=0;
@@ -1358,6 +1410,9 @@ function logSale(){
     document.getElementById(`lg-q${i}-disp`).className='qt-count';
     document.getElementById(`qt-row-${i}`).classList.remove('active');
   });
+  
+  wasteQtyVal=0;
+  stepWaste(0); 
   document.getElementById('lg-preview').classList.remove('show');
   
   showToast('Entry logged successfully!');
@@ -1406,7 +1461,6 @@ function renderSales(){
       tierRows=`<div class="sale-tier-row"><span class="stl">${s.portions} portions @ GHS ${fmt(s.pricePerPortion)}</span></div>`;
     }
 
-    // NEW: Render explicit waste row
     if(s.wasteQty > 0) {
       tierRows += `<div class="sale-tier-row" style="margin-top:4px; padding-top:4px; border-top:1px dashed var(--bd)">
         <span class="stl" style="color:var(--red)">Unsold / Waste × ${s.wasteQty}</span>
@@ -1430,7 +1484,7 @@ function renderSales(){
       </div>
       <div class="sale-tiers">${tierRows}</div>
       <div class="sale-footer">
-        <span style="font-size:11px;color:var(--sub)">Cost: GHS ${fmt(s.costs)}</span>
+        <span style="font-size:11px;color:var(--sub)">Capital: GHS ${fmt(s.costs)}</span>
         ${profitTag}
       </div>
     </div>`;
@@ -1438,7 +1492,7 @@ function renderSales(){
 }
 
 // ══════════════════════════════════════
-// UNIFIED LEDGER TOGGLE (TAB 3)
+// UNIFIED LEDGER TOGGLE
 // ══════════════════════════════════════
 function switchLedger(tab) {
   const btnS = document.getElementById('tog-sales');
