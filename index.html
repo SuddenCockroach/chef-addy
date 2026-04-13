@@ -11,15 +11,15 @@
    DESIGN TOKENS
 ══════════════════════════════════════ */
 :root {
-  --bg: #000000; /* Deepened for stronger contrast */
+  --bg: #000000;
   --s1: rgba(255,255,255,0.036);
   --s2: rgba(255,255,255,0.058);
   --s3: rgba(255,255,255,0.09);
   --s-solid: #141414;
   --s2-solid: #1c1c1c;
-  --bd: rgba(255,255,255,0.09); /* Slightly more visible borders */
+  --bd: rgba(255,255,255,0.09);
   --bd2: rgba(255,255,255,0.15);
-  --text: #ffffff; /* Brighter text */
+  --text: #ffffff;
   --sub: #999;
   --dim: #555;
   --green: #1df58a;
@@ -475,7 +475,7 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
 .sale-footer{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1px solid var(--bd)}
 
 /* ══════════════════════════════════════
-   CHECKLIST (UPDATED)
+   CHECKLIST
 ══════════════════════════════════════ */
 .cl-item{
   display:flex;align-items:center;gap:10px;
@@ -699,8 +699,8 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
   <p class="pg-sub">Tap + to count each portion sold. That's it.</p>
   
   <div class="sales-summary">
-    <div class="s-sum"><div class="s-sum-lbl">Revenue</div><div class="s-sum-num" id="sl-income">GHS 0</div></div>
-    <div class="s-sum"><div class="s-sum-lbl">Invested</div><div class="s-sum-num" id="sl-costs" style="color:var(--amber)">GHS 0</div></div>
+    <div class="s-sum"><div class="s-sum-lbl">Total Revenue</div><div class="s-sum-num" id="sl-income">GHS 0</div></div>
+    <div class="s-sum"><div class="s-sum-lbl">Capital Invested</div><div class="s-sum-num" id="sl-costs" style="color:var(--amber)">GHS 0</div></div>
     <div class="s-sum"><div class="s-sum-lbl">Net Profit</div><div class="s-sum-num" id="sl-profit" style="color:var(--green)">GHS 0</div></div>
     <div class="s-sum"><div class="s-sum-lbl">Losses</div><div class="s-sum-num" id="sl-loss" style="color:var(--red)">GHS 0</div></div>
   </div>
@@ -813,7 +813,7 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
     </button>
     <button class="nav-btn" id="nav-3" onclick="navigate(3)">
       <div class="nav-bar"></div>
-      <svg viewBox="0 0 20 20" fill="currentColor"><path d="M4 4h12a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1zm1 3v1.5h10V7H5zm0 3v1.5h10V10H5zm0 3v1.5h7V13H5z"/></svg>
+      <svg viewBox="0 0 20 20" fill="currentColor"><path d="M4 4h12a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 01-1-1V5a1 1 0 011-1zm1 3v1.5h10V7H5zm0 3v1.5h10V10H5zm0 3v1.5h7V13H5z"/></svg>
       <span>Ledger</span>
     </button>
   </div>
@@ -883,7 +883,8 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
     <div class="sc-summary" style="margin-bottom:20px;">
       <div class="sc-sum-row"><span>Total portions</span><span id="sc-sum-qty">0</span></div>
       <div class="sc-sum-row"><span>Total revenue</span><span id="sc-sum-rev">GHS 0</span></div>
-      <div class="sc-sum-row"><span>Batch cost</span><span id="sc-sum-cost">GHS 0</span></div>
+      <div class="sc-sum-row"><span>Capital outlay</span><span id="sc-sum-cost">GHS 0</span></div>
+      <div class="sc-sum-row"><span style="font-weight:600">Proj. ROI</span><span id="sc-sum-roi" style="font-weight:600">—</span></div>
       <div class="sc-sum-row big" id="sc-sum-pl-row"><span>Net result</span><span id="sc-sum-pl">—</span></div>
     </div>
     <button class="btn btn-ghost" onclick="closeWhatIf()">Close</button>
@@ -912,7 +913,11 @@ input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
 // ══════════════════════════════════════
 // STATE
 // ══════════════════════════════════════
-const DEFAULTS=["Buy market ingredients","Gas canister full (GHS 300)","Helpers confirmed","Packaging ready","Phone charged for orders","Kitchen cleaned & prepped"];
+const DEFAULTS = [
+  { text: "Procure fresh market ingredients", priority: 1 },
+  { text: "Confirm helpers & sanitize prep area", priority: 2 },
+  { text: "Organize packaging & dispatch tools", priority: 0 }
+];
 let sales=[],history=[],items=[],checked=new Set(),expenses=[];
 let calcState=null;
 const lgQty=[0,0,0];
@@ -930,10 +935,10 @@ window.onload=()=>{
   sales=ls('ca2_sales')||[];
   history=ls('ca2_history')||[];
   
-  // Checklist Migration: Upgrade old strings to priority objects
+  // Data Migration Layer: Upgrade strings to objects safely
   const rawItems = ls('ca2_items');
-  if(!rawItems) {
-    items = DEFAULTS.map(text => ({text, priority: 0}));
+  if(!rawItems || rawItems.length === 0) {
+    items = JSON.parse(JSON.stringify(DEFAULTS));
   } else {
     items = rawItems.map(i => typeof i === 'string' ? {text: i, priority: 0} : i);
   }
@@ -985,7 +990,7 @@ function setGreeting(){
   document.getElementById('home-sub').textContent=subs[new Date().getDay()%subs.length];
 }
 
-// === DASHBOARD STATS (Revenue / Capital / Net) ===
+// === ECONOMIC DASHBOARD STATS ===
 function refreshDash(){
   const income=sales.reduce((s,x)=>s+(x.revenue||0),0);
   const costs=sales.reduce((s,x)=>s+(x.costs||0),0);
@@ -1063,7 +1068,7 @@ function delCheckItem(i){
 }
 function resetChecklist(){
   if(!confirm('Reset checklist to defaults?'))return;
-  items = DEFAULTS.map(text => ({text, priority: 0}));
+  items = JSON.parse(JSON.stringify(DEFAULTS));
   checked=new Set();
   save('ca2_items',items);save('ca2_checked',[]);renderChecklist();
 }
@@ -1246,15 +1251,19 @@ function updateMultiScenario(){
     const rowCls=['active-s','active-m','active-l'];
     document.getElementById(`sc-row-${i}`).classList.toggle(rowCls[i],q>0);
   });
+  
   const totalQty=qtys.reduce((a,b)=>a+b,0);
   const prf=totalRev-calcState.totalCost;
   const mPct=totalRev>0?((prf/totalRev)*100).toFixed(1):'0';
+  const roiVal=calcState.totalCost>0?((prf/calcState.totalCost)*100).toFixed(1):'0'; // ROI Calculation
+  
   const plEl=document.getElementById('sc-pl-amount');
   const lbEl=document.getElementById('sc-pl-label');
   const metaEl=document.getElementById('sc-pl-meta');
   const beRemaining=calcState.totalCost-totalRev;
   const hFill=document.getElementById('health-fill');
   const hLabel=document.getElementById('health-label');
+  
   if(totalQty===0){
     hFill.style.width='0%';hFill.style.background='var(--dim)';
     hLabel.textContent='No portions set yet';
@@ -1305,6 +1314,17 @@ function updateMultiScenario(){
   document.getElementById('sc-sum-qty').textContent=totalQty+' portions';
   document.getElementById('sc-sum-rev').textContent=`GHS ${fmt(totalRev)}`;
   document.getElementById('sc-sum-cost').textContent=`GHS ${fmt(calcState.totalCost)}`;
+  
+  // Render ROI
+  const roiEl = document.getElementById('sc-sum-roi');
+  if (totalQty === 0) {
+      roiEl.textContent = '—';
+      roiEl.style.color = 'var(--sub)';
+  } else {
+      roiEl.textContent = `${roiVal}%`;
+      roiEl.style.color = prf >= 0 ? 'var(--green)' : 'var(--red)';
+  }
+
   const plRow=document.getElementById('sc-sum-pl-row');
   const plVal=document.getElementById('sc-sum-pl');
   if(totalQty===0){plVal.textContent='—';plRow.className='sc-sum-row big';}
