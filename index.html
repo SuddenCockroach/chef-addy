@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Chef Addy</title>
+<title>Tasalla</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ══════════════════════════════════════
    DESIGN TOKENS
@@ -57,7 +57,7 @@ html{scroll-behavior:smooth}
 body{
   background:var(--bg);
   color:var(--text);
-  font-family:'DM Sans',sans-serif;
+  font-family:'Instrument Sans',sans-serif;
   font-size:15px;
   line-height:1.5;
   min-height:100svh;
@@ -156,9 +156,6 @@ body{
 .stat.is-loss .stat-num{color:var(--red)}
 .stat.is-spent .stat-lbl{color:var(--amber)}
 .stat.is-spent .stat-num{color:var(--amber)}
-.stat.is-revenue{border-color:rgba(77,171,247,0.15)}
-.stat.is-revenue .stat-lbl{color:#4dabf7}
-.stat.is-revenue .stat-num{color:#4dabf7}
 
 /* ══════════════════════════════════════
    FORM ELEMENTS
@@ -172,7 +169,7 @@ body{
   border-radius:var(--rsm);
   padding:13px 15px;
   font-size:16px;
-  font-family:'DM Sans',sans-serif;
+  font-family:'Instrument Sans',sans-serif;
   color:var(--text);
   outline:none;
   -webkit-appearance:none;
@@ -191,24 +188,17 @@ body{
 .range-lbl{font-size:10px;font-weight:600;color:var(--sub);letter-spacing:0.1em;text-transform:uppercase}
 .range-val{font-family:'Fraunces',serif;font-size:38px;font-weight:800;letter-spacing:-0.05em;color:var(--green);line-height:1;transition:text-shadow 0.3s}
 .range-val.glowing{text-shadow:0 0 24px var(--g-glow)}
-input[type="range"]{
-  -webkit-appearance:none; width:100%; height:8px;
-  background:var(--s3); border-radius:4px; outline:none;
-  transition: background 0.15s ease;
-}
+input[type="range"]{-webkit-appearance:none;width:100%;height:4px;background:var(--s3);border-radius:2px;outline:none}
 input[type="range"]::-webkit-slider-thumb{
-  -webkit-appearance:none; width:26px; height:26px;
-  background:var(--green); border-radius:50%;
-  border:4px solid var(--bg);
-  box-shadow:0 0 0 1px var(--g-bd), 0 4px 12px rgba(0,0,0,0.5);
+  -webkit-appearance:none;width:22px;height:22px;
+  background:var(--green);border-radius:50%;
+  border:3px solid var(--bg);
+  box-shadow:0 0 0 2px var(--green),0 0 12px var(--g-glow);
   cursor:pointer;
   transition:box-shadow 0.2s,transform 0.15s;
 }
-input[type="range"]::-webkit-slider-thumb:active{
-  transform:scale(1.15);
-  box-shadow:0 0 0 2px var(--green), 0 4px 16px var(--g-glow);
-}
-.range-ends{display:flex;justify-content:space-between;font-size:10px;color:var(--dim);margin-top:8px}
+input[type="range"]::-webkit-slider-thumb:active{transform:scale(1.2)}
+.range-ends{display:flex;justify-content:space-between;font-size:10px;color:var(--dim);margin-top:5px}
 
 /* ══════════════════════════════════════
    BUTTONS
@@ -331,33 +321,26 @@ input[type="range"]::-webkit-slider-thumb:active{
 .pl-meta strong{color:var(--text)}
 
 /* PROFIT HEALTH BAR */
-.health-bar-wrap{margin:2px 0 24px}
+.health-bar-wrap{margin:2px 0 20px}
 .health-bar-label{font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);margin-bottom:6px;text-align:center}
-.health-track{height:6px;background:var(--s3);border-radius:3px;overflow:hidden}
+.health-track{height:5px;background:var(--s3);border-radius:3px;overflow:hidden}
 .health-fill{height:100%;border-radius:3px;transition:width 0.5s cubic-bezier(0.22,1,0.36,1),background 0.3s}
 
 /* TIER SLIDERS IN WHAT IF */
-.sc-tiers{display:flex;flex-direction:column;gap:16px;margin-bottom:14px}
+.sc-tiers{display:flex;flex-direction:column;gap:9px;margin-bottom:14px}
 .sc-tier-row{
   background:rgba(0,0,0,0.2);
-  border:1px solid var(--bd);border-radius:var(--rsm);padding:16px 14px;
-  transition:border-color 0.2s;
+  border:1px solid var(--bd);border-radius:var(--rsm);padding:13px 14px;
+  transition:border-color 0.2s,background 0.2s;
 }
 [data-theme="light"] .sc-tier-row{background:var(--s2)}
-.sc-tier-row.active-s{border-color:rgba(136,136,136,0.3)}
-.sc-tier-row.active-m{border-color:var(--g-bd)}
-.sc-tier-row.active-l{border-color:var(--a-bd)}
-.sc-tier-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.sc-tier-row.active-s{border-color:rgba(136,136,136,0.3);background:rgba(136,136,136,0.04)}
+.sc-tier-row.active-m{border-color:var(--g-bd);background:rgba(29,245,138,0.03)}
+.sc-tier-row.active-l{border-color:var(--a-bd);background:rgba(247,183,49,0.03)}
 .sc-tier-name{font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase}
 .sc-tier-name.s{color:var(--sub)}
 .sc-tier-name.m{color:var(--green)}
 .sc-tier-name.l{color:var(--amber)}
-.sc-tier-price{font-family:'Fraunces',serif;font-size:14px;font-weight:700;color:var(--text)}
-.sc-tier-qty-row{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px}
-.sc-tier-qty{font-family:'Fraunces',serif;font-size:28px;font-weight:800;letter-spacing:-0.04em;color:var(--text);line-height:1}
-.sc-tier-qty small{font-size:12px;font-weight:400;color:var(--sub);font-family:'DM Sans',sans-serif;letter-spacing:0}
-.sc-tier-rev{font-size:11px;color:var(--sub);text-align:right;line-height:1.3}
-.sc-tier-rev strong{display:block;font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--text);letter-spacing:-0.02em}
 
 /* BE MARKER */
 .be-marker{font-size:10px;text-align:center;margin-top:8px;letter-spacing:0.02em;min-height:16px;transition:color 0.25s}
@@ -428,7 +411,7 @@ input[type="range"]::-webkit-slider-thumb:active{
 .qt-price{
   width:100%;background:transparent;border:none;border-bottom:1px solid var(--bd2);
   border-radius:0;padding:4px 0;font-size:15px;font-weight:600;
-  font-family:'DM Sans',sans-serif;color:var(--text);outline:none;
+  font-family:'Instrument Sans',sans-serif;color:var(--text);outline:none;
   transition:border-color 0.2s;
 }
 .qt-price:focus{border-bottom-color:var(--green)}
@@ -610,6 +593,40 @@ input[type="range"]::-webkit-slider-thumb:active{
 .empty{text-align:center;padding:36px 16px;color:var(--sub);font-size:13px}
 .empty-icon{font-size:30px;margin-bottom:10px;opacity:0.35}
 
+/* ── ALLOCATION BAR (What If) ── */
+.sc-alloc-wrap{margin-bottom:14px;padding:11px 14px;background:rgba(0,0,0,0.22);border:1px solid var(--bd);border-radius:var(--rsm)}
+[data-theme="light"] .sc-alloc-wrap{background:var(--s2)}
+.sc-alloc-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.sc-alloc-lbl{font-size:9px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:var(--dim)}
+.sc-alloc-num{font-family:'Fraunces',serif;font-size:14px;font-weight:800;letter-spacing:-0.03em}
+.sc-alloc-num .alloc-used{transition:color 0.25s}
+.sc-alloc-num .alloc-total{color:var(--dim)}
+.sc-alloc-track{height:4px;background:var(--s3);border-radius:2px;overflow:hidden}
+.sc-alloc-fill{height:100%;border-radius:2px;transition:width 0.4s cubic-bezier(0.22,1,0.36,1),background 0.3s}
+
+/* ── REDESIGNED TIER ROWS (What If) ── */
+.sc-tier-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.sc-tier-name-wrap{display:flex;align-items:center;gap:7px}
+.sc-price-badge{font-size:11px;font-weight:700;font-family:'Fraunces',serif;letter-spacing:-0.02em;color:var(--sub);background:var(--s3);padding:2px 8px;border-radius:50px;transition:background 0.2s,color 0.2s}
+.sc-tier-qty-block{text-align:right}
+.sc-tier-qty{font-family:'Fraunces',serif;font-size:26px;font-weight:800;letter-spacing:-0.05em;line-height:1;color:var(--dim);transition:color 0.2s}
+.sc-tier-qty small{font-size:10px;font-weight:400;color:var(--dim);font-family:'Instrument Sans',sans-serif;margin-left:2px;letter-spacing:0}
+.sc-rev-row{display:flex;justify-content:space-between;align-items:center;margin:4px 0 10px;padding:6px 0;border-top:1px solid var(--bd)}
+.sc-rev-lbl{font-size:10px;color:var(--sub);font-weight:500}
+.sc-rev-val{font-family:'Fraunces',serif;font-size:15px;font-weight:700;letter-spacing:-0.03em;color:var(--text);transition:color 0.2s}
+
+/* Active states on tier rows */
+.sc-tier-row.active-s .sc-tier-qty{color:var(--sub)}
+.sc-tier-row.active-s .sc-tier-qty small{color:var(--sub)}
+.sc-tier-row.active-m .sc-price-badge{background:var(--g-dim);color:var(--green)}
+.sc-tier-row.active-m .sc-tier-qty{color:var(--green)}
+.sc-tier-row.active-m .sc-tier-qty small{color:var(--green)}
+.sc-tier-row.active-m .sc-rev-val{color:var(--green)}
+.sc-tier-row.active-l .sc-price-badge{background:var(--a-dim);color:var(--amber)}
+.sc-tier-row.active-l .sc-tier-qty{color:var(--amber)}
+.sc-tier-row.active-l .sc-tier-qty small{color:var(--amber)}
+.sc-tier-row.active-l .sc-rev-val{color:var(--amber)}
+
 /* ── CHECKLIST PRIORITY ── */
 .cl-pri{width:16px;height:16px;min-width:16px;border-radius:50%;background:var(--s3);border:1.5px solid var(--bd2);cursor:pointer;transition:all 0.15s;display:flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0;}
 .cl-pri.p1{background:rgba(247,183,49,0.12);border-color:rgba(247,183,49,0.4)}
@@ -620,7 +637,7 @@ input[type="range"]::-webkit-slider-thumb:active{
 .cl-item.pri-1::before{background:var(--amber)}
 .cl-item.pri-2::before{background:var(--red)}
 .cl-item.done::before{background:var(--green) !important}
-.cl-text-input{flex:1;background:transparent;border:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;padding:1px 3px;border-radius:4px;min-width:0;transition:background 0.15s;}
+.cl-text-input{flex:1;background:transparent;border:none;color:var(--text);font-family:'Instrument Sans',sans-serif;font-size:14px;outline:none;padding:1px 3px;border-radius:4px;min-width:0;transition:background 0.15s;}
 .cl-text-input:focus{background:var(--s3);outline:1px solid var(--g-bd);}
 .cl-legend{display:flex;gap:12px;margin-bottom:10px;font-size:9px;color:var(--dim);align-items:center;flex-wrap:wrap}
 .cl-legend-dot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:3px;vertical-align:middle}
@@ -634,63 +651,14 @@ input[type="range"]::-webkit-slider-thumb:active{
 .waste-badge.show{display:block}
 .waste-hint{font-size:9px;margin-top:2px;letter-spacing:0.03em}
 
-/* ── TAP-TO-TYPE QTY INPUT ── */
-.qt-num{
-  min-width:44px;height:32px;width:52px;
-  background:var(--s3);
-  border-top:1.5px solid var(--bd2);border-bottom:1.5px solid var(--bd2);
-  border-left:none;border-right:none;border-radius:0;
-  font-family:'Fraunces',serif;font-weight:700;font-size:16px;letter-spacing:-0.03em;
-  text-align:center;color:var(--text);outline:none;
-  -webkit-appearance:none;appearance:none;
-  transition:background 0.15s,color 0.15s;
-}
-.qt-num:focus{background:var(--g-dim);color:var(--green);outline:none}
-.qt-num.has-val{background:var(--g-dim);color:var(--green)}
-.qt-num.has-val-red{background:rgba(255,71,87,0.12);color:var(--red)}
-.qt-num::-webkit-outer-spin-button,.qt-num::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-/* ── BATCH COST SECTION ── */
-.batch-cost-wrap{background:var(--s2);border:1px solid var(--bd);border-radius:var(--rsm);padding:13px 14px;margin:10px 0}
-[data-theme="light"] .batch-cost-wrap{background:var(--s2)}
-.lbl-sub{font-size:9px;font-weight:400;color:var(--dim);text-transform:none;letter-spacing:0;margin-left:4px}
-.batch-variance{font-size:11px;font-weight:600;margin-top:5px;min-height:15px;transition:color 0.2s}
-.batch-variance.over{color:var(--red)}
-.batch-variance.saved{color:var(--green)}
-.batch-variance.neutral{color:var(--sub)}
-/* ── BATCH ACCOUNTING HINT ── */
-.batch-hint{font-size:11px;padding:9px 13px;border-radius:var(--rsm);margin:8px 0;display:none;justify-content:space-between;align-items:center;border:1px solid var(--bd)}
-.batch-hint.show{display:flex;animation:tabUp 0.2s both}
-.batch-hint.ok{background:var(--g-dim);border-color:var(--g-bd);color:var(--green)}
-.batch-hint.warn{background:var(--a-dim);border-color:var(--a-bd);color:var(--amber)}
-.batch-hint.over{background:var(--r-dim);border-color:var(--r-bd);color:var(--red)}
-/* ── FORECAST BATCH OVERRIDE ── */
-.fc-override{background:rgba(0,0,0,0.18);border:1px solid var(--bd);border-radius:var(--rsm);padding:13px 14px;margin-bottom:18px}
-[data-theme="light"] .fc-override{background:var(--s2)}
-.fc-override-row{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.fc-override-lbl{font-size:9px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:var(--sub)}
-.fc-override-note{font-size:10px;color:var(--dim);margin-top:2px}
-.fc-override-ctrl{display:flex;align-items:center;gap:4px}
-.fc-override-val{font-family:'Fraunces',serif;font-size:26px;font-weight:800;letter-spacing:-0.05em;color:var(--text);min-width:44px;text-align:center;transition:color 0.2s}
-.fc-override-val.changed{color:var(--amber)}
-.fc-cost-row{display:flex;justify-content:space-between;font-size:11px;color:var(--sub);margin-top:9px;padding-top:9px;border-top:1px dashed var(--bd)}
-.fc-cost-row strong{color:var(--text);font-family:'Fraunces',serif;font-size:13px;font-weight:700}
-/* ── FORECAST REMAIN LABEL ── */
-.fc-remain{font-size:10px;color:var(--sub);text-align:right;min-height:14px;margin-top:4px;transition:color 0.2s}
-.fc-remain.full{color:var(--amber);font-weight:600}
-.fc-remain.ok{color:var(--green)}
-/* ── UNDO TOAST ── */
-.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-100px);background:var(--green);color:#000;padding:11px 20px;border-radius:50px;font-weight:600;opacity:0;transition:all 0.3s cubic-bezier(0.22,1,0.36,1);z-index:9999;font-size:14px;box-shadow:0 4px 20px var(--g-glow);display:flex;align-items:center;gap:10px;white-space:nowrap}
-.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-.toast-undo{background:rgba(0,0,0,0.2);border:none;color:#000;font-family:'Fraunces',serif;font-size:13px;font-weight:800;padding:3px 12px;border-radius:50px;cursor:pointer;letter-spacing:-0.02em;flex-shrink:0}
-.toast-undo:active{background:rgba(0,0,0,0.35)}
-/* ── SELL-THROUGH STRIP (sale cards) ── */
-.sale-st{font-size:10px;color:var(--sub);margin-top:2px}
-.sale-st strong{font-weight:600}
-/* ── BREAK-EVEN IN PREVIEW ── */
-.be-needed{font-size:10px;color:var(--amber);text-align:right;margin-top:2px}
-/* ── CLEAR FORM LINK ── */
-.btn-clear{width:100%;background:none;border:none;color:var(--dim);font-size:12px;padding:10px;cursor:pointer;transition:color 0.15s;font-family:'DM Sans',sans-serif}
-.btn-clear:active{color:var(--red)}
+/* ── STAT COLORS (blue for revenue) ── */
+.stat.is-revenue{border-color:rgba(77,171,247,0.15)}
+.stat.is-revenue .stat-lbl{color:#4dabf7}
+.stat.is-revenue .stat-num{color:#4dabf7}
+
+/* ── TOAST ── */
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-100px);background:var(--green);color:#000;padding:12px 24px;border-radius:50px;font-weight:600;opacity:0;transition:all 0.3s cubic-bezier(0.22,1,0.36,1);z-index:9999;font-size:14px;box-shadow:0 4px 20px var(--g-glow);}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
 </style>
 </head>
 <body data-theme="dark">
@@ -700,8 +668,8 @@ input[type="range"]::-webkit-slider-thumb:active{
 <header class="hdr">
   <div class="hdr-in">
     <div class="brand">
-      <div class="brand-mark">CA</div>
-      <span class="brand-name">Chef Addy</span>
+      <div class="brand-mark">TA</div>
+      <span class="brand-name">Tasalla</span>
     </div>
     <button class="hdr-btn" onclick="openSettings()">
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16">
@@ -808,40 +776,21 @@ input[type="range"]::-webkit-slider-thumb:active{
 
       <div class="tier-grid" id="r-tier-grid"></div>
       
-      <button class="btn btn-ghost" id="run-scenarios-btn" onclick="openForecast()" style="margin: 16px 0; display: none;">📈 Open Sales Forecast</button>
+      <button class="btn btn-ghost" id="run-scenarios-btn" onclick="openWhatIf()" style="margin: 16px 0; display: none;">📊 Run 'What If' Scenarios</button>
 
       <div class="scenario-panel" id="scenario-panel">
         <div class="scenario-hd">
           <div class="sc-badge">
             <svg width="10" height="10" viewBox="0 0 12 12" fill="var(--green)"><path d="M6 1C3.24 1 1 3.24 1 6s2.24 5 5 5 5-2.24-5-5-2.24-5-5-5zm.5 7.5h-1v-4h1v4zm0-5.5h-1V2h1v1z"/></svg>
-            <span id="sc-badge-text">Sales Forecast</span>
+            <span id="sc-badge-text">What If?</span>
           </div>
-          <div class="sc-close" onclick="closeForecast()">✕</div>
-        </div>
-
-        <!-- Batch size override — "I cooked more or less than planned" -->
-        <div class="fc-override">
-          <div class="fc-override-row">
-            <div>
-              <div class="fc-override-lbl">Batch Size</div>
-              <div class="fc-override-note" id="fc-plan-note">Your plan: — portions</div>
-            </div>
-            <div class="fc-override-ctrl">
-              <button class="qt-step minus" onclick="adjustFcBatch(-1)" style="width:28px;height:28px;font-size:16px">−</button>
-              <div class="fc-override-val" id="fc-batch-val">—</div>
-              <button class="qt-step plus" onclick="adjustFcBatch(1)" style="width:28px;height:28px;font-size:16px">+</button>
-            </div>
-          </div>
-          <div class="fc-cost-row">
-            <span>Estimated batch cost</span>
-            <strong id="fc-scaled-cost">GHS 0</strong>
-          </div>
+          <div class="sc-close" onclick="closeWhatIf()">✕</div>
         </div>
 
         <div class="pl-display">
           <div class="pl-label" id="sc-pl-label">Your estimated profit</div>
           <div class="pl-amount profit" id="sc-pl-amount">—</div>
-          <div class="pl-meta" id="sc-pl-meta">Move the sliders to see your outcome</div>
+          <div class="pl-meta" id="sc-pl-meta">Slide the portions below to see your outcome</div>
         </div>
 
         <div class="health-bar-wrap">
@@ -850,56 +799,80 @@ input[type="range"]::-webkit-slider-thumb:active{
         </div>
 
         <div class="sc-tiers">
+          <!-- Allocation tracker -->
+          <div class="sc-alloc-wrap">
+            <div class="sc-alloc-hd">
+              <span class="sc-alloc-lbl">Portions Allocated</span>
+              <span class="sc-alloc-num"><span class="alloc-used" id="sc-alloc-used">0</span><span class="alloc-total"> / <span id="sc-alloc-max">0</span></span></span>
+            </div>
+            <div class="sc-alloc-track"><div class="sc-alloc-fill" id="sc-alloc-fill" style="width:0%;background:var(--dim)"></div></div>
+          </div>
+
           <div class="sc-tier-row" id="sc-row-0">
             <div class="sc-tier-meta">
-              <span class="sc-tier-name s">Small</span>
-              <span class="sc-tier-price" id="sc-tp-0">GHS 0 / serving</span>
+              <div class="sc-tier-name-wrap">
+                <span class="sc-tier-name s">Small</span>
+                <span class="sc-price-badge" id="sc-tp-0">GHS 0</span>
+              </div>
+              <div class="sc-tier-qty-block">
+                <div class="sc-tier-qty"><span id="sc-qty-0">0</span><small> portions</small></div>
+              </div>
             </div>
-            <div class="sc-tier-qty-row">
-              <div class="sc-tier-qty"><span id="sc-qty-0">0</span> <small>portions</small></div>
-              <div class="sc-tier-rev">Revenue<strong id="sc-rev-0">GHS 0</strong></div>
+            <div class="sc-rev-row">
+              <span class="sc-rev-lbl">Revenue</span>
+              <strong class="sc-rev-val" id="sc-rev-0">GHS 0</strong>
             </div>
             <input type="range" id="sc-slider-0" min="0" max="60" value="0" step="1" oninput="handleSliderInput(0)">
-            <div class="range-ends"><span>0</span><span id="sc-max-0" class="fc-remain">—</span></div>
+            <div class="range-ends"><span>0</span><span id="sc-max-0">60 (batch max)</span></div>
           </div>
 
           <div class="sc-tier-row" id="sc-row-1">
             <div class="sc-tier-meta">
-              <span class="sc-tier-name m">Medium</span>
-              <span class="sc-tier-price" id="sc-tp-1">GHS 0 / serving</span>
+              <div class="sc-tier-name-wrap">
+                <span class="sc-tier-name m">Medium</span>
+                <span class="sc-price-badge" id="sc-tp-1">GHS 0</span>
+              </div>
+              <div class="sc-tier-qty-block">
+                <div class="sc-tier-qty"><span id="sc-qty-1">0</span><small> portions</small></div>
+              </div>
             </div>
-            <div class="sc-tier-qty-row">
-              <div class="sc-tier-qty"><span id="sc-qty-1">0</span> <small>portions</small></div>
-              <div class="sc-tier-rev">Revenue<strong id="sc-rev-1">GHS 0</strong></div>
+            <div class="sc-rev-row">
+              <span class="sc-rev-lbl">Revenue</span>
+              <strong class="sc-rev-val" id="sc-rev-1">GHS 0</strong>
             </div>
             <input type="range" id="sc-slider-1" min="0" max="60" value="0" step="1" oninput="handleSliderInput(1)">
-            <div class="range-ends"><span>0</span><span id="sc-max-1" class="fc-remain">—</span></div>
+            <div class="range-ends"><span>0</span><span id="sc-max-1">60 (batch max)</span></div>
           </div>
 
           <div class="sc-tier-row" id="sc-row-2">
             <div class="sc-tier-meta">
-              <span class="sc-tier-name l">Large</span>
-              <span class="sc-tier-price" id="sc-tp-2">GHS 0 / serving</span>
+              <div class="sc-tier-name-wrap">
+                <span class="sc-tier-name l">Large</span>
+                <span class="sc-price-badge" id="sc-tp-2">GHS 0</span>
+              </div>
+              <div class="sc-tier-qty-block">
+                <div class="sc-tier-qty"><span id="sc-qty-2">0</span><small> portions</small></div>
+              </div>
             </div>
-            <div class="sc-tier-qty-row">
-              <div class="sc-tier-qty"><span id="sc-qty-2">0</span> <small>portions</small></div>
-              <div class="sc-tier-rev">Revenue<strong id="sc-rev-2">GHS 0</strong></div>
+            <div class="sc-rev-row">
+              <span class="sc-rev-lbl">Revenue</span>
+              <strong class="sc-rev-val" id="sc-rev-2">GHS 0</strong>
             </div>
             <input type="range" id="sc-slider-2" min="0" max="60" value="0" step="1" oninput="handleSliderInput(2)">
-            <div class="range-ends"><span>0</span><span id="sc-max-2" class="fc-remain">—</span></div>
+            <div class="range-ends"><span>0</span><span id="sc-max-2">60 (batch max)</span></div>
           </div>
         </div>
 
         <div class="be-marker" id="sc-be-marker"></div>
 
         <div class="sc-summary" style="margin-bottom:20px;">
-          <div class="sc-sum-row"><span>Portions planned</span><span id="sc-sum-qty">0</span></div>
+          <div class="sc-sum-row"><span>Total portions</span><span id="sc-sum-qty">0</span></div>
           <div class="sc-sum-row"><span>Total revenue</span><span id="sc-sum-rev">GHS 0</span></div>
           <div class="sc-sum-row"><span>Your investment</span><span id="sc-sum-cost">GHS 0</span></div>
-          <div class="sc-sum-row"><span style="font-weight:600">Projected ROI</span><span id="sc-sum-roi" style="font-weight:600">—</span></div>
+          <div class="sc-sum-row"><span style="font-weight:600">Proj. ROI</span><span id="sc-sum-roi" style="font-weight:600">—</span></div>
           <div class="sc-sum-row big" id="sc-sum-pl-row"><span>Net result</span><span id="sc-sum-pl">—</span></div>
         </div>
-        <button class="btn btn-ghost" onclick="closeForecast()">Close</button>
+        <button class="btn btn-ghost" onclick="closeWhatIf()">Close</button>
       </div>
 
       <div class="result-ctx" id="r-ctx"></div>
@@ -920,7 +893,7 @@ input[type="range"]::-webkit-slider-thumb:active{
       <div class="s-sum-num" id="sl-income" style="color:#4dabf7">GHS 0</div>
     </div>
     <div class="s-sum">
-      <div class="s-sum-lbl">Costs</div>
+      <div class="s-sum-lbl">COGS</div>
       <div class="s-sum-num" id="sl-costs" style="color:var(--amber)">GHS 0</div>
     </div>
     <div class="s-sum">
@@ -928,107 +901,94 @@ input[type="range"]::-webkit-slider-thumb:active{
       <div class="s-sum-num" id="sl-profit" style="color:var(--green)">GHS 0</div>
     </div>
     <div class="s-sum">
-      <div class="s-sum-lbl">Total Losses</div>
+      <div class="s-sum-lbl">Loss Entries</div>
       <div class="s-sum-num" id="sl-loss" style="color:var(--red)">GHS 0</div>
     </div>
   </div>
 
   <div class="log-form-wrap">
-    <div class="log-form-title">Record a Sale</div>
+    <div class="log-form-title">Log a Sale</div>
 
     <div class="field" style="margin-bottom:14px">
       <label class="lbl">What did you cook?</label>
       <input class="inp sm" id="lg-dish" type="text" placeholder="e.g. Jollof Rice">
     </div>
 
-    <!-- Qty rows — tap count to type, or use +/− -->
     <div class="qt-grid">
       <div class="qt-row" id="qt-row-0">
-        <div class="qt-label"><div class="qt-label-name">Small</div></div>
+        <div class="qt-label">
+          <div class="qt-label-name">Small</div>
+        </div>
         <div class="qt-price-wrap">
           <input class="qt-price" id="lg-p0" type="number" inputmode="decimal" placeholder="Price (GHS)" oninput="updateLogPreview()">
           <div class="qt-price-hint">GHS per serving</div>
         </div>
         <div class="qt-stepper">
           <button class="qt-step minus" onclick="stepQty(0,-1)">−</button>
-          <input class="qt-num" id="lg-q0-disp" type="number" inputmode="numeric" min="0" value="0" oninput="onQtyInput(0)">
+          <div class="qt-count" id="lg-q0-disp">0</div>
           <button class="qt-step plus" onclick="stepQty(0,1)">+</button>
         </div>
       </div>
       <div class="qt-row" id="qt-row-1">
-        <div class="qt-label"><div class="qt-label-name m">Medium</div></div>
+        <div class="qt-label">
+          <div class="qt-label-name m">Medium</div>
+        </div>
         <div class="qt-price-wrap">
           <input class="qt-price" id="lg-p1" type="number" inputmode="decimal" placeholder="Price (GHS)" oninput="updateLogPreview()">
           <div class="qt-price-hint">GHS per serving</div>
         </div>
         <div class="qt-stepper">
           <button class="qt-step minus" onclick="stepQty(1,-1)">−</button>
-          <input class="qt-num" id="lg-q1-disp" type="number" inputmode="numeric" min="0" value="0" oninput="onQtyInput(1)">
+          <div class="qt-count" id="lg-q1-disp">0</div>
           <button class="qt-step plus" onclick="stepQty(1,1)">+</button>
         </div>
       </div>
       <div class="qt-row" id="qt-row-2">
-        <div class="qt-label"><div class="qt-label-name l">Large</div></div>
+        <div class="qt-label">
+          <div class="qt-label-name l">Large</div>
+        </div>
         <div class="qt-price-wrap">
           <input class="qt-price" id="lg-p2" type="number" inputmode="decimal" placeholder="Price (GHS)" oninput="updateLogPreview()">
           <div class="qt-price-hint">GHS per serving</div>
         </div>
         <div class="qt-stepper">
           <button class="qt-step minus" onclick="stepQty(2,-1)">−</button>
-          <input class="qt-num" id="lg-q2-disp" type="number" inputmode="numeric" min="0" value="0" oninput="onQtyInput(2)">
+          <div class="qt-count" id="lg-q2-disp">0</div>
           <button class="qt-step plus" onclick="stepQty(2,1)">+</button>
         </div>
       </div>
     </div>
 
-    <!-- Live batch accounting hint -->
-    <div id="batch-hint" class="batch-hint">
-      <span id="bh-text">—</span>
-      <span id="bh-sub" style="font-size:10px;opacity:0.75;text-align:right"></span>
-    </div>
-
-    <!-- Left over row — tracking only, no longer adds to cost -->
-    <div class="qt-row waste-row" id="qt-row-waste">
-      <div class="qt-label">
-        <div class="qt-label-name w">Left over</div>
-        <div style="font-size:8px;color:var(--red);margin-top:2px;line-height:1.2">unsold</div>
-      </div>
-      <div class="qt-price-wrap">
-        <div style="font-size:13px;font-weight:500;color:var(--sub)">Unsold portions</div>
-        <div class="waste-hint" id="waste-cost-hint" style="color:var(--dim)">for tracking only</div>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
-        <div class="qt-stepper">
-          <button class="qt-step minus" onclick="stepWaste(-1)">−</button>
-          <input class="qt-num" id="lg-waste-disp" type="number" inputmode="numeric" min="0" value="0" oninput="onWasteInput()">
-          <button class="qt-step plus" onclick="stepWaste(1)">+</button>
+      <div class="qt-row waste-row" id="qt-row-waste">
+        <div class="qt-label">
+          <div class="qt-label-name w">Waste</div>
+          <div style="font-size:8px;color:var(--red);margin-top:2px;line-height:1.2">unsold</div>
         </div>
-        <div id="waste-badge" class="waste-badge"></div>
+        <div class="qt-price-wrap">
+          <div style="font-size:13px;font-weight:500;color:var(--sub)">Unsold portions</div>
+          <div class="waste-hint" id="waste-cost-hint" style="color:var(--dim)">Run Price first</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+          <div class="qt-stepper">
+            <button class="qt-step minus" onclick="stepWaste(-1)">−</button>
+            <div class="qt-count" id="lg-waste-disp">0</div>
+            <button class="qt-step plus" onclick="stepWaste(1)">+</button>
+          </div>
+          <div id="waste-badge" class="waste-badge"></div>
+        </div>
       </div>
-    </div>
 
-    <!-- Batch cost — unified math model -->
-    <div class="batch-cost-wrap">
-      <label class="lbl">What did this batch cost you? <span class="lbl-sub">ingredients, gas & helpers</span></label>
-      <input class="inp sm" id="lg-batch-cost" type="number" inputmode="decimal" placeholder="GHS 0" oninput="updateLogPreview()">
-      <div id="lg-batch-variance" class="batch-variance neutral"></div>
-    </div>
-
-    <div class="field" style="margin-bottom:12px">
-      <label class="lbl">Any extra costs today? <span class="lbl-sub">delivery, fuel, packaging</span></label>
-      <input class="inp sm" id="lg-costs" type="number" inputmode="decimal" placeholder="GHS 0" oninput="updateLogPreview()">
+    <div class="field" style="margin-bottom:12px; margin-top:8px;">
+      <label class="lbl">Extra Costs <span style="font-size:9px;color:var(--dim);font-weight:400;text-transform:none;letter-spacing:0">(e.g. delivery, fuel — added on top of auto-COGS)</span></label>
+      <input class="inp sm" id="lg-costs" type="number" inputmode="decimal" placeholder="GHS 0 — auto" oninput="updateLogPreview()">
     </div>
 
     <div id="lg-preview" class="log-preview">
       <span id="lg-prev-rev">Revenue: GHS 0</span>
-      <div style="text-align:right">
-        <div id="lg-prev-prf" style="font-weight:600"></div>
-        <div id="lg-prev-be" class="be-needed"></div>
-      </div>
+      <span id="lg-prev-prf" style="font-weight:600"></span>
     </div>
 
     <button class="btn btn-g" onclick="logSale()">Record This Sale</button>
-    <button class="btn-clear" onclick="clearSaleForm()">Clear form</button>
   </div>
 
   <div id="sales-list"></div>
@@ -1090,20 +1050,20 @@ input[type="range"]::-webkit-slider-thumb:active{
 // STATE
 // ══════════════════════════════════════
 const DEFAULTS=["Buy market ingredients","Gas canister full (GHS 300)","Helpers confirmed","Packaging ready","Phone charged for orders","Kitchen cleaned & prepped"];
-let sales=[],history=[],items=[],checked=new Set(),expenses=[],itemPriorities={};
+let sales=[],history=[],items=[],checked=new Set(),expenses=[],investments=[];
+let itemPriorities={};  
 let calcState=null;
 let lgWaste=0;
+let invFormOpen=false; // kept for compat — investment log removed
+const lgQty=[0,0,0]; 
+// Cost of Goods Sold per Small-tier portion — set by calcPrice(), used by logSale()
 let currentBaseCOGS=0;
+// Shared tier multipliers — single source of truth used by calcPrice
 const TIER_MULTS=[1,1.6,2.2];
-// Forecast batch override (null = use calcState.portions)
-let fcBatchOverride=null;
-// Undo state
-let undoBuffer=null,undoTimer=null;
 
 const ls=k=>{try{return JSON.parse(localStorage.getItem(k))}catch{return null}};
 const save=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 const fmt=n=>{if(isNaN(n)||n==null)return'0';const r=Math.round(n*100)/100;return r%1===0?r.toString():r.toFixed(2)};
-const getQty=t=>Math.max(0,parseInt(document.getElementById(`lg-q${t}-disp`).value)||0);
 
 // ══════════════════════════════════════
 // BOOT
@@ -1115,16 +1075,20 @@ window.onload=()=>{
   checked=new Set(ls('ca2_checked')||[]);
   expenses=ls('ca2_expenses')||defaultExpenses();
   currentBaseCOGS=ls('ca2_cogs')||0;
+  investments=ls('ca2_investments')||[];
   itemPriorities=ls('ca2_priorities')||{};
   const theme=ls('ca2_theme')||'dark';
   document.body.setAttribute('data-theme',theme);
   updateThemeUI(theme);
-  setGreeting();renderChecklist();renderExpenseList();refreshDash();
+  setGreeting();
+  renderChecklist();
+  renderExpenseList();
+  updateWasteCostHint();
+  refreshDash();
   document.getElementById('margin-slider').addEventListener('input',e=>{
-    document.getElementById('margin-val').textContent=e.target.value+'%';
-    fillSlider(e.target);
+    const v=e.target.value;
+    document.getElementById('margin-val').textContent=v+'%';
   });
-  fillSlider(document.getElementById('margin-slider'));
 };
 
 function defaultExpenses(){
@@ -1144,20 +1108,12 @@ function navigate(t){
 }
 
 // ══════════════════════════════════════
-// TOAST (with optional undo)
+// GREETING
 // ══════════════════════════════════════
 function showToast(msg){
   const t=document.getElementById('toast');
-  t.innerHTML=`<span>${msg}</span>`;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2600);
-}
-function showUndoToast(msg,fn){
-  window._undoFn=fn;
-  const t=document.getElementById('toast');
-  t.innerHTML=`<span>${msg}</span><button class="toast-undo" onclick="window._undoFn&&(window._undoFn(),document.getElementById('toast').classList.remove('show'))">Undo</button>`;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),5000);
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
 }
 
 function setGreeting(){
@@ -1168,18 +1124,33 @@ function setGreeting(){
   document.getElementById('home-sub').textContent=subs[new Date().getDay()%subs.length];
 }
 
+
+// ══════════════════════════════════════
+// INVESTMENT LOG — removed; costs now derived from sales
+// ══════════════════════════════════════
+function toggleInvForm(){}   // no-op stub
+function logInvestment(){}   // no-op stub
+function deleteInvestment(){} // no-op stub
+function renderInvestments(){} // no-op stub
+
 // ══════════════════════════════════════
 // DASHBOARD
 // ══════════════════════════════════════
 function refreshDash(){
   const totalRevenue=sales.reduce((s,x)=>s+(x.revenue||0),0);
-  const totalInvested=sales.reduce((s,x)=>s+(x.batchCost||x.costs||0),0);
+  // "Invested" = total costs incurred across all logged sales (COGS + extras)
+  const totalInvested=sales.reduce((s,x)=>s+(x.costs||0),0);
   const netPL=totalRevenue-totalInvested;
-  const totalLosses=sales.reduce((s,x)=>x.profit<0?s+Math.abs(x.profit):s,0);
-  if(document.getElementById('dash-revenue'))animNum('dash-revenue',totalRevenue);
-  if(document.getElementById('dash-invested'))animNum('dash-invested',totalInvested);
+  
+  // Track true Loss Entries to align with accurate P/L analysis
+  const totalLosses=sales.reduce((s,x)=>x.profit<0 ? s+Math.abs(x.profit) : s, 0);
+
+  if(document.getElementById('dash-revenue')) animNum('dash-revenue',totalRevenue);
+  if(document.getElementById('dash-invested')) animNum('dash-invested',totalInvested);
   animNum('dash-profit',Math.abs(netPL));
-  if(document.getElementById('dash-loss'))animNum('dash-loss',totalLosses);
+  if(document.getElementById('dash-loss')) animNum('dash-loss',totalLosses);
+
+  // Flip profit stat card colour if in loss
   const profitStat=document.getElementById('stat-profit');
   const profitLbl=document.getElementById('stat-pl-lbl');
   if(profitStat&&profitLbl){
@@ -1188,10 +1159,14 @@ function refreshDash(){
   }
 }
 function animNum(id,target){
-  const el=document.getElementById(id);if(!el)return;
+  const el=document.getElementById(id);
   const dur=650,t0=performance.now();
-  const step=now=>{const p=Math.min((now-t0)/dur,1),ease=1-Math.pow(1-p,3);
-    el.textContent='GHS '+Math.round(target*ease);if(p<1)requestAnimationFrame(step);};
+  const step=now=>{
+    const p=Math.min((now-t0)/dur,1);
+    const ease=1-Math.pow(1-p,3);
+    el.textContent='GHS '+Math.round(target*ease);
+    if(p<1)requestAnimationFrame(step);
+  };
   requestAnimationFrame(step);
 }
 
@@ -1200,16 +1175,21 @@ function animNum(id,target){
 // ══════════════════════════════════════
 function renderChecklist(){
   const list=document.getElementById('cl-list');
+  // Sort: urgent(2) → important(1) → normal(0), done items always at bottom
   const withMeta=items.map((item,i)=>({item,i,done:checked.has(i),pri:itemPriorities[i]||0}));
   const undone=withMeta.filter(x=>!x.done).sort((a,b)=>b.pri-a.pri);
-  const sorted=[...undone,...withMeta.filter(x=>x.done)];
+  const done=withMeta.filter(x=>x.done);
+  const sorted=[...undone,...done];
+
   list.innerHTML=sorted.map(({item,i,done,pri})=>{
     const priClass=pri===2?'p2':pri===1?'p1':'';
     const priDot=pri===2?'🔴':pri===1?'⚡':'·';
-    return`<div class="cl-item${done?' done':''}${pri===1?' pri-1':pri===2?' pri-2':''}" id="cl-${i}">
-      <div class="cl-pri ${priClass}" onclick="cyclePriority(${i})">${priDot}</div>
+    const itemCls=`cl-item${done?' done':''}${pri===1?' pri-1':pri===2?' pri-2':''}`;
+    return`<div class="${itemCls}" id="cl-${i}">
+      <div class="cl-pri ${priClass}" onclick="cyclePriority(${i})" title="Set priority">${priDot}</div>
       <div class="cl-box${done?' on':''}" onclick="toggleCheck(${i})">${done?'✓':''}</div>
-      <input class="cl-text-input" id="cl-inp-${i}" value="${item.replace(/"/g,'&quot;')}"
+      <input class="cl-text-input" id="cl-inp-${i}"
+        value="${item.replace(/"/g,'&quot;')}"
         ${done?'readonly':''}
         onblur="saveItemText(${i},this.value)"
         onkeydown="if(event.key==='Enter')this.blur()">
@@ -1218,13 +1198,51 @@ function renderChecklist(){
   }).join('');
   updateProgress();
 }
-function cyclePriority(i){const cur=itemPriorities[i]||0,next=(cur+1)%3;if(next===0)delete itemPriorities[i];else itemPriorities[i]=next;save('ca2_priorities',itemPriorities);renderChecklist();}
-function saveItemText(i,val){const t=val.trim();if(t)items[i]=t;save('ca2_items',items);}
-function toggleCheck(i){if(checked.has(i))checked.delete(i);else checked.add(i);save('ca2_checked',[...checked]);renderChecklist();}
-function addCheckItem(){const name=prompt('New prep item:');if(!name||!name.trim())return;items.push(name.trim());save('ca2_items',items);renderChecklist();}
-function delCheckItem(i){items.splice(i,1);const nc=new Set();checked.forEach(c=>{if(c<i)nc.add(c);else if(c>i)nc.add(c-1)});checked=nc;const newPri={};Object.entries(itemPriorities).forEach(([k,v])=>{const ki=parseInt(k);if(ki<i)newPri[ki]=v;else if(ki>i)newPri[ki-1]=v;});itemPriorities=newPri;save('ca2_items',items);save('ca2_checked',[...checked]);save('ca2_priorities',itemPriorities);renderChecklist();}
-function resetChecklist(){if(!confirm('Reset checklist to defaults?'))return;items=[...DEFAULTS];checked=new Set();itemPriorities={};save('ca2_items',items);save('ca2_checked',[]);save('ca2_priorities',{});renderChecklist();}
-function updateProgress(){const total=items.length,done=checked.size,pct=total?Math.round((done/total)*100):0;document.getElementById('prog-lbl').textContent=`${done} of ${total} done`;document.getElementById('prog-pct').textContent=pct+'%';document.getElementById('prog-fill').style.width=pct+'%';}
+
+function cyclePriority(i){
+  const cur=itemPriorities[i]||0;
+  const next=(cur+1)%3;
+  if(next===0)delete itemPriorities[i];
+  else itemPriorities[i]=next;
+  save('ca2_priorities',itemPriorities);renderChecklist();
+}
+
+function saveItemText(i,val){
+  const t=val.trim();
+  if(t) items[i]=t;
+  save('ca2_items',items);
+}
+function toggleCheck(i){
+  if(checked.has(i))checked.delete(i);else checked.add(i);
+  save('ca2_checked',[...checked]);renderChecklist();
+}
+function addCheckItem(){
+  const name=prompt('New prep item:');
+  if(!name||!name.trim())return;
+  items.push(name.trim());save('ca2_items',items);renderChecklist();
+}
+function delCheckItem(i){
+  items.splice(i,1);
+  const nc=new Set();
+  checked.forEach(c=>{if(c<i)nc.add(c);else if(c>i)nc.add(c-1)});
+  checked=nc;
+  const newPri={};
+  Object.entries(itemPriorities).forEach(([k,v])=>{const ki=parseInt(k);if(ki<i)newPri[ki]=v;else if(ki>i)newPri[ki-1]=v;});
+  itemPriorities=newPri;
+  save('ca2_items',items);save('ca2_checked',[...checked]);save('ca2_priorities',itemPriorities);renderChecklist();
+}
+function resetChecklist(){
+  if(!confirm('Reset checklist to defaults?'))return;
+  items=[...DEFAULTS];checked=new Set();itemPriorities={};
+  save('ca2_items',items);save('ca2_checked',[]);save('ca2_priorities',{});renderChecklist();
+}
+function updateProgress(){
+  const total=items.length,done=checked.size;
+  const pct=total?Math.round((done/total)*100):0;
+  document.getElementById('prog-lbl').textContent=`${done} of ${total} done`;
+  document.getElementById('prog-pct').textContent=pct+'%';
+  document.getElementById('prog-fill').style.width=pct+'%';
+}
 
 // ══════════════════════════════════════
 // EXPENSES
@@ -1238,7 +1256,11 @@ function renderExpenseList(){
       <button class="exp-del" onclick="removeExpense(${i})">✕</button>
     </div>`).join('');
 }
-function addExpense(){expenses.push({id:Date.now(),name:'',amount:0});saveExpenses();renderExpenseList();const inputs=document.querySelectorAll('.expense-item .name');if(inputs.length)inputs[inputs.length-1].focus();}
+function addExpense(){
+  expenses.push({id:Date.now(),name:'',amount:0});saveExpenses();renderExpenseList();
+  const inputs=document.querySelectorAll('.expense-item .name');
+  if(inputs.length)inputs[inputs.length-1].focus();
+}
 function removeExpense(i){expenses.splice(i,1);saveExpenses();renderExpenseList();}
 function saveExpenses(){save('ca2_expenses',expenses);}
 
@@ -1248,16 +1270,34 @@ function saveExpenses(){save('ca2_expenses',expenses);}
 function calcPrice(){
   const name=document.getElementById('p-name').value.trim()||'Untitled Dish';
   const portions=Math.max(parseFloat(document.getElementById('p-portions').value)||1,1);
-  let inputSellEst=parseFloat(document.getElementById('p-sellest').value)||portions;
-  const sellEst=Math.min(Math.max(inputSellEst,1),portions);
-  document.getElementById('p-sellest').value=sellEst;
+  
+  let inputSellEst = parseFloat(document.getElementById('p-sellest').value) || portions;
+  const sellEst = Math.min(Math.max(inputSellEst, 1), portions); 
+  document.getElementById('p-sellest').value = sellEst;
+
   const margin=parseFloat(document.getElementById('margin-slider').value)/100;
   const totalCost=expenses.reduce((s,e)=>s+(parseFloat(e.amount)||0),0);
-  const cpp=totalCost/portions;
-  const TIERS=[{label:'Small',mult:TIER_MULTS[0]},{label:'Medium',mult:TIER_MULTS[1]},{label:'Large',mult:TIER_MULTS[2]}];
-  const tierPrices=TIERS.map(t=>({...t,cost:parseFloat((cpp*t.mult).toFixed(2)),price:Math.ceil(cpp*t.mult/(1-margin))}));
-  currentBaseCOGS=cpp;save('ca2_cogs',currentBaseCOGS);
+  const cpp=totalCost/portions; // cost per Small-tier portion
+
+  // Tapered multipliers reflect real food economics — Large ≠ 3× Small in cost or value
+  const TIERS=[
+    {label:'Small', mult:TIER_MULTS[0]},
+    {label:'Medium',mult:TIER_MULTS[1]},
+    {label:'Large', mult:TIER_MULTS[2]}
+  ];
+  const tierPrices=TIERS.map(t=>({
+    ...t,
+    cost:parseFloat((cpp*t.mult).toFixed(2)),
+    price:Math.ceil(cpp*t.mult/(1-margin))
+  }));
+
+  // Persist base COGS so logSale() can allocate proportional costs automatically
+  currentBaseCOGS=cpp;
+  save('ca2_cogs',currentBaseCOGS);
+  updateWasteCostHint();
+
   calcState={totalCost,portions,tierPrices,sellEst,name,margin};
+
   document.getElementById('r-lbl').textContent=`Your Prices · ${name}`;
   document.getElementById('r-tier-grid').innerHTML=tierPrices.map((t,i)=>`
     <div class="tier${i===1?' hi':''}">
@@ -1266,155 +1306,201 @@ function calcPrice(){
       <div class="tier-unit">per serving</div>
       <div class="tier-row">Your cost<strong>GHS ${fmt(t.cost)}</strong></div>
     </div>`).join('');
+
   document.getElementById('scenario-panel').classList.remove('show');
+
+  // midProfit = Medium revenue for sellEst portions minus the full batch cost
   const midProfit=tierPrices[1].price*sellEst-totalCost;
-  // Break-even: how many Medium portions to cover batch cost
-  const bePortions=Math.ceil(totalCost/tierPrices[1].price);
-  document.getElementById('r-ctx').textContent=`${Math.round(margin*100)}% margin · batch of ${portions} · GHS ${fmt(totalCost)} total cost`;
+  document.getElementById('r-ctx').textContent=
+    `${Math.round(margin*100)}% margin · batch of ${portions} · GHS ${fmt(totalCost)} total cost`;
+
   document.getElementById('r-pills').innerHTML=`
-    <div class="r-pill">Cost per portion<strong>GHS ${fmt(cpp)}</strong></div>
-    <div class="r-pill">Break-even (Med)<strong style="color:var(--amber)">${bePortions} sold</strong></div>
-    <div class="r-pill hi">Projected profit<strong style="color:${midProfit>=0?'var(--green)':'var(--red)'}">GHS ${fmt(midProfit)}</strong></div>`;
+    <div class="r-pill">Base Cost/portion<strong>GHS ${fmt(cpp)}</strong></div>
+    <div class="r-pill">Batch cost<strong>GHS ${fmt(totalCost)}</strong></div>
+    <div class="r-pill hi">Est. profit (Med)<strong style="color:${midProfit>=0?'var(--green)':'var(--red)'}">GHS ${fmt(midProfit)}</strong></div>`;
+
   document.getElementById('r-breakdown').innerHTML=
     expenses.map(e=>`<div class="brow"><span>${e.name||'Cost'}</span><span>GHS ${fmt(e.amount)}</span></div>`).join('')+
     `<div class="brow total"><span>Total batch cost</span><span>GHS ${fmt(totalCost)}</span></div>`;
-  document.getElementById('r-save-btn').onclick=()=>savePlan(name,portions,sellEst,totalCost,margin,tierPrices,midProfit,[...expenses]);
+
+  document.getElementById('r-save-btn').onclick=()=>
+    savePlan(name,portions,sellEst,totalCost,margin,tierPrices,midProfit,[...expenses]);
+
   document.getElementById('price-result').style.display='block';
   document.getElementById('run-scenarios-btn').style.display='block';
   setTimeout(()=>document.getElementById('price-result').scrollIntoView({behavior:'smooth',block:'nearest'}),80);
 }
 
 // ══════════════════════════════════════
-// SALES FORECAST (was "What If?")
+// WHAT IF? SCENARIO (MULTI-TIER)
 // ══════════════════════════════════════
-function openForecast(){
-  if(!calcState)return;
-  fcBatchOverride=null;
-  const activeBatch=calcState.portions;
-  calcState.tierPrices.forEach((t,i)=>{
-    document.getElementById(`sc-tp-${i}`).textContent=`GHS ${t.price} / serving`;
-    const sl=document.getElementById(`sc-slider-${i}`);
-    sl.max=activeBatch;
-    sl.value=(i===1)?calcState.sellEst:0;
+function openWhatIf() {
+  if(!calcState) return;
+  const maxQty = calcState.portions;
+  const seed = calcState.sellEst;
+  calcState.tierPrices.forEach((t, i) => {
+      document.getElementById(`sc-tp-${i}`).textContent = `GHS ${t.price}`;
+      const sl = document.getElementById(`sc-slider-${i}`);
+      sl.max = maxQty;
+      document.getElementById(`sc-max-${i}`).textContent = `${maxQty} (batch max)`;
+      sl.value = (i === 1) ? seed : 0; 
   });
-  updateFcBatchDisplay();
-  document.getElementById('sc-badge-text').textContent='Sales Forecast';
+  // Seed the allocation bar max
+  const allocMax = document.getElementById('sc-alloc-max');
+  if(allocMax) allocMax.textContent = maxQty;
+  document.getElementById('sc-badge-text').textContent = 'What If? · Move the sliders';
   document.getElementById('scenario-panel').classList.add('show');
-  [0,1,2].forEach(i=>fillSlider(document.getElementById(`sc-slider-${i}`)));
+  [0, 1, 2].forEach(i => fillSlider(document.getElementById(`sc-slider-${i}`)));
   updateMultiScenario();
   setTimeout(()=>document.getElementById('scenario-panel').scrollIntoView({behavior:'smooth',block:'nearest'}),80);
 }
-function closeForecast(){document.getElementById('scenario-panel').classList.remove('show');}
-// Keep old names as aliases for any references
-const openWhatIf=openForecast,closeWhatIf=closeForecast;
 
-function adjustFcBatch(delta){
-  if(!calcState)return;
-  const cur=fcBatchOverride!==null?fcBatchOverride:calcState.portions;
-  fcBatchOverride=Math.max(1,cur+delta);
-  // Reset slider values to 0 when batch changes (avoids out-of-range values)
-  [0,1,2].forEach(i=>{
-    const sl=document.getElementById(`sc-slider-${i}`);
-    sl.max=fcBatchOverride;
-    sl.value=0;
-    fillSlider(sl);
-  });
-  updateFcBatchDisplay();
-  updateMultiScenario();
-}
-
-function updateFcBatchDisplay(){
-  if(!calcState)return;
-  const activeBatch=fcBatchOverride!==null?fcBatchOverride:calcState.portions;
-  const scaledCost=calcState.totalCost*(activeBatch/calcState.portions);
-  const valEl=document.getElementById('fc-batch-val');
-  valEl.textContent=activeBatch;
-  valEl.className='fc-override-val'+(fcBatchOverride!==null&&fcBatchOverride!==calcState.portions?' changed':'');
-  document.getElementById('fc-plan-note').textContent=`Your plan: ${calcState.portions} portions`;
-  document.getElementById('fc-scaled-cost').textContent=`GHS ${fmt(scaledCost)}`;
+function closeWhatIf(){
+  document.getElementById('scenario-panel').classList.remove('show');
 }
 
 function fillSlider(sl){
-  const min=parseFloat(sl.min)||0,max=parseFloat(sl.max)||1,val=parseFloat(sl.value)||0;
-  const pct=max>min?((val-min)/(max-min))*100:0;
+  const pct=(sl.value/sl.max)*100;
   sl.style.background=`linear-gradient(to right,var(--green) ${pct}%,var(--s3) ${pct}%)`;
 }
 
-// FIXED: only clamp the moved slider. Never mutate other sliders' .max.
+// Clamp the moved slider so total never exceeds batch size, then update
 function handleSliderInput(idx){
   if(!calcState)return;
-  const activeBatch=fcBatchOverride!==null?fcBatchOverride:calcState.portions;
+  const batchMax=calcState.portions;
   const sliders=[0,1,2].map(i=>document.getElementById(`sc-slider-${i}`));
-  const othersSum=sliders.reduce((s,sl,i)=>i!==idx?s+Math.round(+sl.value||0):s,0);
-  const allowed=Math.max(0,activeBatch-othersSum);
-  const clamped=Math.min(Math.round(+sliders[idx].value||0),allowed);
-  sliders[idx].value=clamped;
+  // Sum of the OTHER two sliders
+  const othersSum=sliders.reduce((s,sl,i)=>i!==idx?s+Math.max(0,Math.round(+sl.value||0)):s,0);
+  // Clamp the moved slider so the total doesn't exceed batchMax
+  const allowed=Math.max(0,batchMax-othersSum);
+  if(Math.round(+sliders[idx].value)>allowed)sliders[idx].value=allowed;
   updateMultiScenario();
 }
 
 function updateMultiScenario(){
   if(!calcState)return;
-  const activeBatch=fcBatchOverride!==null?fcBatchOverride:calcState.portions;
-  // Proportionally scale cost if batch size was overridden
-  const scaledCost=calcState.totalCost*(activeBatch/calcState.portions);
+  const batchMax=calcState.portions;
   const sliders=[0,1,2].map(i=>document.getElementById(`sc-slider-${i}`));
+
+  // Read current values
   const qtys=sliders.map(sl=>Math.round(+sl.value||0));
   const usedTotal=qtys.reduce((a,b)=>a+b,0);
-  const leftover=Math.max(0,activeBatch-usedTotal);
 
-  // Fill sliders — keep sl.max stable at activeBatch
+  // Dynamically update each slider's max = batchMax minus what the OTHER two use
   sliders.forEach((sl,i)=>{
-    sl.max=activeBatch;
     fillSlider(sl);
-    const lbl=document.getElementById(`sc-max-${i}`);
-    if(leftover===0){lbl.textContent='Batch full';lbl.className='fc-remain full';}
-    else{lbl.textContent=`${leftover} left`;lbl.className='fc-remain ok';}
+    const othersSum=qtys.reduce((s,v,j)=>j!==i?s+v:s,0);
+    const remaining=Math.max(0,batchMax-othersSum);
+    sl.max=remaining;
+    const leftover=batchMax-usedTotal;
+    document.getElementById(`sc-max-${i}`).textContent=
+      leftover<=0?'Batch full':remaining===batchMax?`${batchMax} (batch max)`:`${remaining} left`;
   });
-
   const tiers=calcState.tierPrices;
+
   let totalRev=0;
   qtys.forEach((q,i)=>{
-    const rev=tiers[i].price*q;totalRev+=rev;
+    const rev=tiers[i].price*q;
+    totalRev+=rev;
     document.getElementById(`sc-qty-${i}`).textContent=q;
     document.getElementById(`sc-rev-${i}`).textContent=`GHS ${fmt(rev)}`;
+    // Highlight active rows
     const rowCls=['active-s','active-m','active-l'];
     document.getElementById(`sc-row-${i}`).classList.toggle(rowCls[i],q>0);
   });
 
   const totalQty=qtys.reduce((a,b)=>a+b,0);
-  // UNIFIED MATH: same as sales log — profit = revenue − fullBatchCost
-  const prf=totalRev-scaledCost;
+
+  // Update allocation bar
+  const allocUsed=document.getElementById('sc-alloc-used');
+  const allocFill=document.getElementById('sc-alloc-fill');
+  if(allocUsed) allocUsed.textContent=totalQty;
+  if(allocFill){
+    const allocPct=batchMax>0?Math.min((totalQty/batchMax)*100,100):0;
+    allocFill.style.width=allocPct+'%';
+    allocFill.style.background=allocPct>=100?'var(--amber)':totalQty>0?'var(--green)':'var(--dim)';
+  }
+  const prf=totalRev-calcState.totalCost;
   const mPct=totalRev>0?((prf/totalRev)*100).toFixed(1):'0';
-  const roiVal=scaledCost>0?((prf/scaledCost)*100).toFixed(1):'0';
-  const beRemaining=scaledCost-totalRev;
-  const plEl=document.getElementById('sc-pl-amount'),lbEl=document.getElementById('sc-pl-label'),metaEl=document.getElementById('sc-pl-meta');
+  const roiVal=calcState.totalCost>0?((prf/calcState.totalCost)*100).toFixed(1):'0';
+
+  const plEl=document.getElementById('sc-pl-amount');
+  const lbEl=document.getElementById('sc-pl-label');
+  const metaEl=document.getElementById('sc-pl-meta');
+
+  // Break-even remaining: how much more revenue is still needed to cover the full batch cost.
+  const beRemaining=calcState.totalCost-totalRev; 
 
   // Health bar
-  const hFill=document.getElementById('health-fill'),hLabel=document.getElementById('health-label');
-  if(totalQty===0){hFill.style.width='0%';hFill.style.background='var(--dim)';hLabel.textContent='Move the sliders to see your outcome';}
-  else if(prf<0){const r=Math.min(Math.abs(prf)/scaledCost,1);hFill.style.width=Math.round((1-r)*40)+'%';hFill.style.background='var(--red)';hLabel.textContent='Below break-even — add more portions';}
-  else if(prf===0){hFill.style.width='50%';hFill.style.background='var(--amber)';hLabel.textContent='Exactly at break-even';}
-  else{const r=Math.min(prf/(scaledCost*1.5),1);hFill.style.width=Math.round(50+r*50)+'%';hFill.style.background='var(--green)';hLabel.textContent=`Looking good — ${mPct}% margin`;}
+  const hFill=document.getElementById('health-fill');
+  const hLabel=document.getElementById('health-label');
+  if(totalQty===0){
+    hFill.style.width='0%';hFill.style.background='var(--dim)';
+    hLabel.textContent='No portions set yet';
+  } else if(prf<0){
+    const lossRatio=Math.min(Math.abs(prf)/calcState.totalCost,1);
+    hFill.style.width=Math.round((1-lossRatio)*40)+'%';
+    hFill.style.background='var(--red)';
+    hLabel.textContent='Below break-even — slide up to recover';
+  } else if(prf===0){
+    hFill.style.width='50%';hFill.style.background='var(--amber)';
+    hLabel.textContent='Exactly at break-even';
+  } else {
+    const profitRatio=Math.min(prf/(calcState.totalCost*1.5),1);
+    hFill.style.width=Math.round(50+profitRatio*50)+'%';
+    hFill.style.background='var(--green)';
+    hLabel.textContent=`Profit health: ${mPct}% margin`;
+  }
 
-  if(totalQty===0){plEl.textContent='—';plEl.className='pl-amount';lbEl.textContent='Your estimated result';metaEl.innerHTML='Move the sliders to see your outcome';}
-  else if(Math.abs(prf)<0.01){plEl.textContent='Break Even';plEl.className='pl-amount breakeven';lbEl.textContent='Exactly at break-even';metaEl.innerHTML=`Revenue <strong>GHS ${fmt(totalRev)}</strong> covers your costs`;}
-  else if(prf>0){plEl.textContent=`GHS ${fmt(prf)}`;plEl.className='pl-amount profit';lbEl.textContent='Your estimated profit';metaEl.innerHTML=`Revenue <strong>GHS ${fmt(totalRev)}</strong> · Margin <strong>${mPct}%</strong>`;}
-  else{plEl.textContent=`−GHS ${fmt(Math.abs(prf))}`;plEl.className='pl-amount loss';lbEl.textContent='You\'re in the red';metaEl.innerHTML=`Need <strong>GHS ${fmt(Math.abs(prf))}</strong> more · Revenue so far <strong>GHS ${fmt(totalRev)}</strong>`;}
+  if(totalQty===0){
+    plEl.textContent='—';plEl.className='pl-amount';
+    lbEl.textContent='Your estimated result';
+    metaEl.innerHTML='Slide the portions below to see your outcome';
+  } else if(Math.abs(prf)<0.01){
+    plEl.textContent='Break Even';plEl.className='pl-amount breakeven';
+    lbEl.textContent='Exactly at break-even';
+    metaEl.innerHTML=`Revenue <strong>GHS ${fmt(totalRev)}</strong> covers your costs`;
+  } else if(prf>0){
+    plEl.textContent=`GHS ${fmt(prf)}`;plEl.className='pl-amount profit';
+    lbEl.textContent='Your estimated profit';
+    metaEl.innerHTML=`Revenue <strong>GHS ${fmt(totalRev)}</strong> · Margin <strong>${mPct}%</strong>`;
+  } else {
+    plEl.textContent=`−GHS ${fmt(Math.abs(prf))}`;plEl.className='pl-amount loss';
+    lbEl.textContent='You\'re in the red';
+    metaEl.innerHTML=`Short by <strong>GHS ${fmt(Math.abs(prf))}</strong> · Revenue <strong>GHS ${fmt(totalRev)}</strong>`;
+  }
 
   const beEl=document.getElementById('sc-be-marker');
-  if(totalQty===0){beEl.textContent='';beEl.className='be-marker';}
-  else if(beRemaining>0.01){beEl.textContent=`Need GHS ${fmt(beRemaining)} more to break even`;beEl.className='be-marker bad';}
-  else if(Math.abs(beRemaining)<=0.01){beEl.textContent='▲ Exactly at break-even';beEl.className='be-marker warn';}
-  else{beEl.textContent=`✓ Costs covered · GHS ${fmt(Math.abs(beRemaining))} above break-even`;beEl.className='be-marker ok';}
+  if(totalQty===0){
+    beEl.textContent='';beEl.className='be-marker';
+  } else if(beRemaining>0.01){
+    beEl.textContent=`Need GHS ${fmt(beRemaining)} more revenue to break even`;beEl.className='be-marker bad';
+  } else if(Math.abs(beRemaining)<=0.01){
+    beEl.textContent='▲ Exactly at break-even';beEl.className='be-marker warn';
+  } else {
+    beEl.textContent=`✓ Costs covered — GHS ${fmt(Math.abs(beRemaining))} above break-even`;beEl.className='be-marker ok';
+  }
 
   document.getElementById('sc-sum-qty').textContent=totalQty+' portions';
   document.getElementById('sc-sum-rev').textContent=`GHS ${fmt(totalRev)}`;
-  document.getElementById('sc-sum-cost').textContent=`GHS ${fmt(scaledCost)}`;
-  const roiEl=document.getElementById('sc-sum-roi');
-  if(totalQty===0){roiEl.textContent='—';roiEl.style.color='var(--sub)';}
-  else if(scaledCost===0){roiEl.textContent='∞';roiEl.style.color='var(--green)';}
-  else{roiEl.textContent=`${roiVal}% ROI · ${mPct}% margin`;roiEl.style.color=prf>=0?'var(--green)':'var(--red)';}
-  const plRow=document.getElementById('sc-sum-pl-row'),plVal=document.getElementById('sc-sum-pl');
+  document.getElementById('sc-sum-cost').textContent=`GHS ${fmt(calcState.totalCost)}`;
+
+  // Render ROI
+  const roiEl = document.getElementById('sc-sum-roi');
+  const grossMarginPct = totalRev > 0 ? ((prf / totalRev) * 100).toFixed(1) : '0';
+  if (totalQty === 0) {
+      roiEl.textContent = '—';
+      roiEl.style.color = 'var(--sub)';
+  } else if (calcState.totalCost === 0) {
+      roiEl.textContent = '∞ (no cost basis)';
+      roiEl.style.color = 'var(--green)';
+  } else {
+      roiEl.textContent = `${roiVal}% ROI · ${grossMarginPct}% margin`;
+      roiEl.style.color = prf >= 0 ? 'var(--green)' : 'var(--red)';
+  }
+
+  const plRow=document.getElementById('sc-sum-pl-row');
+  const plVal=document.getElementById('sc-sum-pl');
   if(totalQty===0){plVal.textContent='—';plRow.className='sc-sum-row big';}
   else if(prf>0){plVal.textContent=`+GHS ${fmt(prf)}`;plRow.className='sc-sum-row big profit-row';}
   else if(prf<0){plVal.textContent=`−GHS ${fmt(Math.abs(prf))}`;plRow.className='sc-sum-row big loss-row';}
@@ -1422,189 +1508,158 @@ function updateMultiScenario(){
 }
 
 // ══════════════════════════════════════
-// SALES LOG — unified math model
+// 2-TAP SALES LOG
 // ══════════════════════════════════════
 function stepQty(tier,delta){
-  const inp=document.getElementById(`lg-q${tier}-disp`);
-  const next=Math.max(0,(parseInt(inp.value)||0)+delta);
-  inp.value=next;
-  inp.className='qt-num'+(next>0?' has-val':'');
-  document.getElementById(`qt-row-${tier}`).classList.toggle('active',next>0);
-  updateLogPreview();updateBatchHint();
+  lgQty[tier]=Math.max(0,lgQty[tier]+delta);
+  const disp=document.getElementById(`lg-q${tier}-disp`);
+  disp.textContent=lgQty[tier];
+  disp.className='qt-count'+(lgQty[tier]>0?' has-val':'');
+  // Highlight row if active
+  document.getElementById(`qt-row-${tier}`).classList.toggle('active',lgQty[tier]>0);
+  updateLogPreview();
 }
-function onQtyInput(tier){
-  const inp=document.getElementById(`lg-q${tier}-disp`);
-  const v=Math.max(0,parseInt(inp.value)||0);inp.value=v;
-  inp.className='qt-num'+(v>0?' has-val':'');
-  document.getElementById(`qt-row-${tier}`).classList.toggle('active',v>0);
-  updateLogPreview();updateBatchHint();
-}
+
 function stepWaste(delta){
-  const inp=document.getElementById('lg-waste-disp');
-  lgWaste=Math.max(0,(parseInt(inp.value)||0)+delta);
-  inp.value=lgWaste;inp.className='qt-num'+(lgWaste>0?' has-val-red':'');
+  lgWaste=Math.max(0,lgWaste+delta);
+  const disp=document.getElementById('lg-waste-disp');
+  disp.textContent=lgWaste;
+  disp.className='qt-count'+(lgWaste>0?' has-val-red':'');
   document.getElementById('qt-row-waste').classList.toggle('active',lgWaste>0);
-  updateWasteBadge();updateLogPreview();updateBatchHint();
-}
-function onWasteInput(){
-  const inp=document.getElementById('lg-waste-disp');
-  lgWaste=Math.max(0,parseInt(inp.value)||0);
-  inp.className='qt-num'+(lgWaste>0?' has-val-red':'');
-  document.getElementById('qt-row-waste').classList.toggle('active',lgWaste>0);
-  updateWasteBadge();updateLogPreview();updateBatchHint();
-}
-function updateWasteBadge(){
   const badge=document.getElementById('waste-badge');
-  if(lgWaste>0&&currentBaseCOGS>0){badge.textContent=`~GHS ${fmt(lgWaste*currentBaseCOGS)} of cost`;badge.classList.add('show');}
-  else badge.classList.remove('show');
+  if(lgWaste>0&&currentBaseCOGS>0){
+    badge.textContent=`−GHS ${fmt(lgWaste*currentBaseCOGS)} waste loss`;
+    badge.classList.add('show');
+  } else {
+    badge.classList.remove('show');
+  }
+  updateLogPreview();
 }
+
 function updateWasteCostHint(){
   const hint=document.getElementById('waste-cost-hint');
   if(!hint)return;
-  hint.textContent='for tracking only';hint.style.color='var(--dim)';
-}
-
-// Shows batch sell-through live when calcState is active
-function updateBatchHint(){
-  const hint=document.getElementById('batch-hint');if(!hint)return;
-  if(!calcState){hint.classList.remove('show');return;}
-  const sold=[0,1,2].reduce((a,t)=>a+getQty(t),0);
-  const total=sold+lgWaste;
-  const batch=calcState.portions;
-  const unaccounted=batch-total;
-  hint.classList.add('show');
-  const stPct=batch>0?Math.round((sold/batch)*100):0;
-  document.getElementById('bh-sub').textContent=`${sold} sold · ${lgWaste} left over · ${stPct}% of batch`;
-  if(unaccounted>0){hint.className='batch-hint show warn';document.getElementById('bh-text').textContent=`${unaccounted} portion${unaccounted!==1?'s':''} still unaccounted`;}
-  else if(unaccounted<0){hint.className='batch-hint show over';document.getElementById('bh-text').textContent=`${Math.abs(unaccounted)} over batch size`;}
-  else{hint.className='batch-hint show ok';document.getElementById('bh-text').textContent='All portions accounted for ✓';}
+  if(currentBaseCOGS>0){
+    hint.textContent=`GHS ${fmt(currentBaseCOGS)} per portion`;
+    hint.style.color='var(--red)';
+  } else {
+    hint.textContent='Run Price first to auto-calculate';
+    hint.style.color='var(--dim)';
+  }
 }
 
 function updateLogPreview(){
-  const rev=[0,1,2].reduce((s,t)=>s+(parseFloat(document.getElementById(`lg-p${t}`).value)||0)*getQty(t),0);
-  // UNIFIED MATH: profit = revenue − batchCost − extraCosts
-  const batchCost=parseFloat(document.getElementById('lg-batch-cost').value)||0;
-  const extraCosts=parseFloat(document.getElementById('lg-costs').value)||0;
-  const totalCost=batchCost+extraCosts;
-  const prf=rev-totalCost;
+  const tiers=[0,1,2].map(i=>({
+    price:parseFloat(document.getElementById(`lg-p${i}`).value)||0,
+    qty:lgQty[i],
+    cogsFraction:currentBaseCOGS*lgQty[i] // Corrected: flat cpp per portion — tier mults are pricing levers, not ingredient ratios
+  }));
+  const manualCosts=parseFloat(document.getElementById('lg-costs').value)||0;
+  const wasteCost=lgWaste*currentBaseCOGS;
+  const rev=tiers.reduce((s,t)=>s+t.price*t.qty,0);
+  
+  // Corrected: manualCosts is additive (extra delivery, fuel, etc.) — never replaces COGS
+  const cogsAlloc=tiers.reduce((s,t)=>s+t.cogsFraction,0);
+  const allocatedCost=cogsAlloc + manualCosts + wasteCost;
+
+  const prf=rev-allocatedCost;
   const el=document.getElementById('lg-preview');
-  const anyQty=[0,1,2].some(t=>getQty(t)>0)||lgWaste>0;
-  const anyVal=anyQty||batchCost>0||extraCosts>0||[0,1,2].some(t=>parseFloat(document.getElementById(`lg-p${t}`).value)||0);
-  if(!anyVal){el.classList.remove('show');return;}
+  const any=tiers.some(t=>t.price>0||t.qty>0)||manualCosts>0||lgWaste>0;
+  if(!any){el.classList.remove('show');return;}
   document.getElementById('lg-prev-rev').textContent=`Revenue: GHS ${fmt(rev)}`;
   const pEl=document.getElementById('lg-prev-prf');
   if(prf>=0){pEl.textContent=`+GHS ${fmt(prf)} profit`;pEl.style.color='var(--green)';}
   else{pEl.textContent=`−GHS ${fmt(Math.abs(prf))} loss`;pEl.style.color='var(--red)';}
-  // Break-even: how much more revenue needed
-  const beEl=document.getElementById('lg-prev-be');
-  if(batchCost>0&&prf<0){beEl.textContent=`GHS ${fmt(Math.abs(prf))} more to break even`;}
-  else if(batchCost>0&&prf>=0){beEl.textContent='';}
-  else beEl.textContent='';
   el.classList.add('show');
-  // Budget variance
-  updateBatchVariance(batchCost);
-}
-
-function updateBatchVariance(entered){
-  const varEl=document.getElementById('lg-batch-variance');if(!varEl)return;
-  if(!calcState||!entered){varEl.textContent='';return;}
-  const planned=calcState.totalCost;
-  const diff=entered-planned;
-  if(Math.abs(diff)<0.5){varEl.textContent='Matches your plan';varEl.className='batch-variance neutral';}
-  else if(diff>0){varEl.textContent=`GHS ${fmt(diff)} over your plan`;varEl.className='batch-variance over';}
-  else{varEl.textContent=`GHS ${fmt(Math.abs(diff))} under your plan`;varEl.className='batch-variance saved';}
 }
 
 function prefillSalePrices(){
+  // If we have a recent calculation, prefill prices
   if(!calcState)return;
   calcState.tierPrices.forEach((t,i)=>{
     const inp=document.getElementById(`lg-p${i}`);
     if(inp&&!inp.value)inp.value=t.price;
   });
-  // Pre-fill batch cost with planned batch cost
-  const bc=document.getElementById('lg-batch-cost');
-  if(bc&&!bc.value)bc.value=calcState.totalCost;
-  updateBatchVariance(calcState.totalCost);
-  updateBatchHint();
 }
 
 function logSale(){
   const dish=document.getElementById('lg-dish').value.trim()||'Unnamed Dish';
+  const manualCosts=parseFloat(document.getElementById('lg-costs').value)||0;
+  const wasteCost=lgWaste*currentBaseCOGS;
   const LABELS=['Small','Medium','Large'];
-  const tiers=[0,1,2].map(i=>({label:LABELS[i],price:parseFloat(document.getElementById(`lg-p${i}`).value)||0,qty:getQty(i)})).filter(t=>t.qty>0);
-  const batchCost=parseFloat(document.getElementById('lg-batch-cost').value)||0;
-  const extraCosts=parseFloat(document.getElementById('lg-costs').value)||0;
-  if(!tiers.length&&!batchCost){alert('Add portions sold and your batch cost first.');return;}
+  const tiers=[0,1,2].map(i=>({
+    label:LABELS[i],
+    price:parseFloat(document.getElementById(`lg-p${i}`).value)||0,
+    qty:lgQty[i],
+    cogsFraction:currentBaseCOGS*lgQty[i] // Corrected: flat cpp per portion
+  })).filter(t=>t.qty>0);
+  
+  if(!tiers.length&&lgWaste===0&&!manualCosts){alert('Add portions sold or waste.');return;}
+  
   const revenue=tiers.reduce((s,t)=>s+t.price*t.qty,0);
-  const totalCosts=batchCost+extraCosts;
-  const profit=revenue-totalCosts;
-  const soldTotal=tiers.reduce((a,t)=>a+(t.qty||0),0);
-  const batchSize=calcState?calcState.portions:null;
-  const stPct=batchSize&&(soldTotal+lgWaste)>0?Math.round((soldTotal/(soldTotal+lgWaste))*100):null;
-  sales.unshift({
-    id:Date.now(),date:new Date().toLocaleDateString('en-GB'),
-    dish,batchCost,extraCosts,costs:totalCosts,revenue,profit,
-    tiers,wasteQty:lgWaste,soldTotal,batchSize,stPct
-  });
+  
+  // Corrected: Additive logic for manual costs
+  const cogsAlloc=tiers.reduce((s,t)=>s+t.cogsFraction,0);
+  const allocatedCost=cogsAlloc + manualCosts + wasteCost;
+  
+  const profit=revenue-allocatedCost;
+  
+  sales.unshift({id:Date.now(),date:new Date().toLocaleDateString('en-GB'),dish,costs:allocatedCost,revenue,profit,tiers,wasteQty:lgWaste,wasteCost});
   save('ca2_sales',sales);
-  clearSaleForm();
-  showToast('Sale recorded ✓');
-  renderSales();renderSalesTotals();refreshDash();
-}
-
-function clearSaleForm(){
+  
+  // Reset form
   document.getElementById('lg-dish').value='';
-  document.getElementById('lg-batch-cost').value='';
   document.getElementById('lg-costs').value='';
-  document.getElementById('lg-batch-variance').textContent='';
   [0,1,2].forEach(i=>{
     document.getElementById(`lg-p${i}`).value='';
-    const inp=document.getElementById(`lg-q${i}-disp`);
-    inp.value=0;inp.className='qt-num';
+    lgQty[i]=0;
+    document.getElementById(`lg-q${i}-disp`).textContent='0';
+    document.getElementById(`lg-q${i}-disp`).className='qt-count';
     document.getElementById(`qt-row-${i}`).classList.remove('active');
   });
+  // Reset waste stepper
   lgWaste=0;
-  const wd=document.getElementById('lg-waste-disp');if(wd){wd.value=0;wd.className='qt-num';}
-  const wb=document.getElementById('waste-badge');if(wb)wb.classList.remove('show');
-  const wr=document.getElementById('qt-row-waste');if(wr)wr.classList.remove('active');
+  const wd=document.getElementById('lg-waste-disp');
+  if(wd){wd.textContent='0';wd.className='qt-count';}
+  const wb=document.getElementById('waste-badge');
+  if(wb)wb.classList.remove('show');
+  const wr=document.getElementById('qt-row-waste');
+  if(wr)wr.classList.remove('active');
   document.getElementById('lg-preview').classList.remove('show');
-  const bh=document.getElementById('batch-hint');if(bh)bh.classList.remove('show');
+  showToast('Sale logged ✓');
+  renderSales();renderSalesTotals();refreshDash();
 }
 
 function deleteSale(id){
-  const idx=sales.findIndex(s=>s.id===id);if(idx===-1)return;
-  undoBuffer={sale:sales[idx],idx};
-  sales.splice(idx,1);
-  save('ca2_sales',sales);
+  sales=sales.filter(s=>s.id!==id);save('ca2_sales',sales);
   renderSales();renderSalesTotals();refreshDash();
-  if(undoTimer)clearTimeout(undoTimer);
-  showUndoToast('Sale removed',()=>{
-    if(!undoBuffer)return;
-    sales.splice(undoBuffer.idx,0,undoBuffer.sale);
-    undoBuffer=null;
-    save('ca2_sales',sales);
-    renderSales();renderSalesTotals();refreshDash();
-    showToast('Sale restored ✓');
-  });
-  undoTimer=setTimeout(()=>{undoBuffer=null;},5100);
 }
 
 function renderSalesTotals(){
   const income=sales.reduce((s,x)=>s+(x.revenue||0),0);
   const costs=sales.reduce((s,x)=>s+(x.costs||0),0);
   const netProfit=income-costs;
-  const totalLosses=sales.reduce((s,x)=>x.profit<0?s+Math.abs(x.profit):s,0);
+  const totalLosses=sales.reduce((s,x)=>x.profit<0 ? s+Math.abs(x.profit) : s, 0);
+
   document.getElementById('sl-income').textContent='GHS '+fmt(income);
   document.getElementById('sl-costs').textContent='GHS '+fmt(costs);
-  const lEl=document.getElementById('sl-loss');if(lEl)lEl.textContent='GHS '+fmt(totalLosses);
-  const pEl=document.getElementById('sl-profit');pEl.textContent='GHS '+fmt(netProfit);pEl.style.color=netProfit>=0?'var(--green)':'var(--red)';
+  const lEl=document.getElementById('sl-loss');
+  if(lEl)lEl.textContent='GHS '+fmt(totalLosses);
+  const pEl=document.getElementById('sl-profit');
+  pEl.textContent='GHS '+fmt(netProfit);
+  pEl.style.color=netProfit>=0?'var(--green)':'var(--red)';
 }
 
 function renderSales(){
   const c=document.getElementById('sales-list');
-  if(!sales.length){c.innerHTML=`<div class="empty"><div class="empty-icon">🧾</div>No sales recorded yet.<br>Fill in the form above after you cook!</div>`;return;}
+  if(!sales.length){
+    c.innerHTML=`<div class="empty"><div class="empty-icon">🧾</div>No sales logged yet.<br>Use the form above after you cook!</div>`;
+    return;
+  }
   c.innerHTML=sales.map(s=>{
-    const profitTag=s.profit>=0?`<span class="tag green">+GHS ${fmt(s.profit)}</span>`:`<span class="tag red">−GHS ${fmt(Math.abs(s.profit))}</span>`;
+    const profitTag=s.profit>=0
+      ?`<span class="tag green">+GHS ${fmt(s.profit)}</span>`
+      :`<span class="tag red">−GHS ${fmt(Math.abs(s.profit))}</span>`;
     let tierRows='';
     if(s.tiers&&s.tiers.length){
       tierRows=s.tiers.map(t=>`<div class="sale-tier-row">
@@ -1616,36 +1671,26 @@ function renderSales(){
     }
     if(s.wasteQty>0){
       tierRows+=`<div class="sale-tier-row" style="margin-top:4px;padding-top:4px;border-top:1px dashed var(--bd)">
-        <span class="stl" style="color:var(--amber)">Left over × ${s.wasteQty}</span>
-        <span class="stv" style="color:var(--sub)">tracking only</span>
+        <span class="stl" style="color:var(--red)">Unsold × ${s.wasteQty}</span>
+        <span class="stv" style="color:var(--red)">Loss <strong>GHS ${fmt(s.wasteCost)}</strong></span>
       </div>`;
     }
-    if(s.extraCosts>0){
-      tierRows+=`<div class="sale-tier-row" style="margin-top:4px;padding-top:4px;border-top:1px dashed var(--bd)">
-        <span class="stl" style="color:var(--amber)">Extra costs</span>
-        <span class="stv" style="color:var(--amber)"><strong>GHS ${fmt(s.extraCosts)}</strong></span>
-      </div>`;
-    }
-    const soldQty=s.tiers?s.tiers.reduce((a,t)=>a+(t.qty||0),0):(s.portions||0);
-    const stNote=s.stPct!=null?` · ${s.stPct}% sell-through`:'';
-    const batchNote=s.batchSize?` · batch of ${s.batchSize}`:'';
-    const dotColor=s.profit<0?'background:var(--red);box-shadow:0 0 8px rgba(255,71,87,0.4)':'';
+    const totalQty=(s.tiers?s.tiers.reduce((a,t)=>a+(t.qty||0),0):(s.portions||0))+(s.wasteQty||0);
     return`<div class="sale-card">
       <div class="sale-top">
-        <div class="sale-dot" style="${dotColor}"></div>
+        <div class="sale-dot"></div>
         <div class="sale-info">
           <div class="sale-dish">${s.dish}</div>
-          <div class="sale-meta">${s.date} · ${soldQty} portions sold${batchNote}</div>
-          ${s.stPct!=null?`<div class="sale-st"><strong>${s.stPct}%</strong> sell-through</div>`:''}
+          <div class="sale-meta">${s.date} · ${totalQty} units logged</div>
         </div>
         <div class="sale-right">
-          <div class="sale-rev" style="${s.profit<0?'color:var(--sub)':''}">GHS ${fmt(s.revenue)}</div>
+          <div class="sale-rev">GHS ${fmt(s.revenue)}</div>
           <span class="sale-del" onclick="deleteSale(${s.id})">✕</span>
         </div>
       </div>
       <div class="sale-tiers">${tierRows}</div>
       <div class="sale-footer">
-        <span style="font-size:11px;color:var(--sub)">Batch cost: GHS ${fmt(s.batchCost||s.costs)}</span>
+        <span style="font-size:11px;color:var(--sub)">Cost: GHS ${fmt(s.costs)}</span>
         ${profitTag}
       </div>
     </div>`;
@@ -1653,53 +1698,39 @@ function renderSales(){
 }
 
 // ══════════════════════════════════════
-// HISTORY — with Load Plan + actual outcome
+// HISTORY
 // ══════════════════════════════════════
 function savePlan(name,portions,sellEst,totalCost,margin,tierPrices,profit,expSnap){
-  // Snapshot any sales for this dish as context
-  const related=sales.filter(s=>s.dish&&s.dish.toLowerCase()===name.toLowerCase()).slice(0,5);
-  const actualRevenue=related.reduce((s,x)=>s+(x.revenue||0),0);
-  const actualProfit=related.reduce((s,x)=>s+(x.profit||0),0);
   history.unshift({
     id:Date.now(),date:new Date().toLocaleDateString('en-GB'),
     name,portions,sellEst,totalCost,margin,tierPrices,
-    sellPrice:tierPrices[1].price,profit,expenses:expSnap,
-    actualRevenue,actualProfit,relatedCount:related.length
+    sellPrice:tierPrices[1].price,profit,expenses:expSnap
   });
   save('ca2_history',history);
   navigate(3);
 }
 
-function loadPlan(id){
-  const h=history.find(x=>x.id===id);if(!h)return;
-  document.getElementById('p-name').value=h.name;
-  document.getElementById('p-portions').value=h.portions;
-  document.getElementById('p-sellest').value=h.sellEst;
-  document.getElementById('margin-slider').value=Math.round((h.margin||0.5)*100);
-  document.getElementById('margin-val').textContent=Math.round((h.margin||0.5)*100)+'%';
-  fillSlider(document.getElementById('margin-slider'));
-  if(h.expenses&&h.expenses.length){expenses=h.expenses.map(e=>({...e}));saveExpenses();renderExpenseList();}
-  navigate(1);
-  showToast('Plan loaded — tap Calculate to apply');
-}
-
 function renderHistory(){
   const c=document.getElementById('hist-list');
-  if(!history.length){c.innerHTML=`<div class="empty"><div class="empty-icon">📊</div>No saved plans yet.<br>Calculate a price and tap "Save This Plan".</div>`;return;}
+  if(!history.length){
+    c.innerHTML=`<div class="empty"><div class="empty-icon">📊</div>No saved plans yet.<br>Calculate a price and tap "Save This Plan".</div>`;
+    return;
+  }
   c.innerHTML=history.map((h,i)=>{
     const cpm=h.totalCost/h.portions;
     const tiers=h.tierPrices||[
-      {label:'Small',mult:TIER_MULTS[0],price:Math.ceil(TIER_MULTS[0]*cpm/(1-(h.margin||0.45))),cost:parseFloat((TIER_MULTS[0]*cpm).toFixed(2))},
+      {label:'Small', mult:TIER_MULTS[0],price:Math.ceil(TIER_MULTS[0]*cpm/(1-(h.margin||0.45))),cost:parseFloat((TIER_MULTS[0]*cpm).toFixed(2))},
       {label:'Medium',mult:TIER_MULTS[1],price:Math.ceil(TIER_MULTS[1]*cpm/(1-(h.margin||0.45))),cost:parseFloat((TIER_MULTS[1]*cpm).toFixed(2))},
-      {label:'Large',mult:TIER_MULTS[2],price:Math.ceil(TIER_MULTS[2]*cpm/(1-(h.margin||0.45))),cost:parseFloat((TIER_MULTS[2]*cpm).toFixed(2))}
+      {label:'Large', mult:TIER_MULTS[2],price:Math.ceil(TIER_MULTS[2]*cpm/(1-(h.margin||0.45))),cost:parseFloat((TIER_MULTS[2]*cpm).toFixed(2))}
     ];
-    const tHTML=tiers.map((t,ti)=>`<div class="ht${ti===1?' hi':''}">
-      <div class="ht-name">${t.label}</div><div class="ht-price">GHS ${t.price}</div>
-      <div class="ht-unit">per serving</div><div class="ht-row">Cost<strong>GHS ${fmt(t.cost)}</strong></div>
-    </div>`).join('');
+    const tHTML=tiers.map((t,ti)=>`
+      <div class="ht${ti===1?' hi':''}">
+        <div class="ht-name">${t.label}</div>
+        <div class="ht-price">GHS ${t.price}</div>
+        <div class="ht-unit">per serving</div>
+        <div class="ht-row">Cost<strong>GHS ${fmt(t.cost)}</strong></div>
+      </div>`).join('');
     const expRows=(h.expenses||[]).map(e=>`<div class="brow"><span>${e.name||'Cost'}</span><span>GHS ${fmt(e.amount)}</span></div>`).join('');
-    const outcomeRow=h.relatedCount>0
-      ?`<div class="brow${h.actualProfit>=0?' profit':' loss'}"><span>Actual result (${h.relatedCount} sale${h.relatedCount!==1?'s':''})</span><span>${h.actualProfit>=0?'+':'−'}GHS ${fmt(Math.abs(h.actualProfit))}</span></div>`:'';
     return`<div class="hist-card" id="hc-${i}">
       <div class="hist-hd" onclick="toggleHist(${i})">
         <div>
@@ -1719,13 +1750,9 @@ function renderHistory(){
         <div class="breakdown">
           ${expRows}
           <div class="brow total"><span>Total batch cost</span><span>GHS ${fmt(h.totalCost)}</span></div>
-          <div class="brow${h.profit>=0?' profit':' loss'}"><span>Projected profit (medium tier)</span><span>${h.profit>=0?'+':'−'}GHS ${fmt(Math.abs(h.profit))}</span></div>
-          ${outcomeRow}
+          <div class="brow${h.profit>=0?' profit':' loss'}"><span>Est. profit at medium tier</span><span>${h.profit>=0?'+':'−'}GHS ${fmt(Math.abs(h.profit))}</span></div>
         </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px">
-          <button class="btn btn-ghost sm" onclick="loadPlan(${h.id})">↩ Load this plan</button>
-          <button class="btn btn-ghost sm" onclick="deleteHistory(${h.id})" style="color:var(--red)">Remove</button>
-        </div>
+        <button class="btn btn-ghost sm" onclick="deleteHistory(${h.id})" style="margin-top:12px">Remove plan</button>
       </div>
     </div>`;
   }).join('');
@@ -1739,9 +1766,19 @@ function deleteHistory(id){history=history.filter(h=>h.id!==id);save('ca2_histor
 // ══════════════════════════════════════
 function openSettings(){document.getElementById('settings-bd').classList.add('show');}
 function closeSettings(){document.getElementById('settings-bd').classList.remove('show');}
-function toggleTheme(){const cur=document.body.getAttribute('data-theme'),next=cur==='dark'?'light':'dark';document.body.setAttribute('data-theme',next);save('ca2_theme',next);updateThemeUI(next);}
-function updateThemeUI(theme){document.getElementById('theme-icon').textContent=theme==='dark'?'☀️':'🌙';document.getElementById('theme-lbl').textContent=theme==='dark'?'Switch to Light Mode':'Switch to Dark Mode';}
-function clearAllData(){if(!confirm('Delete ALL data? This cannot be undone.'))return;localStorage.clear();location.reload();}
+function toggleTheme(){
+  const cur=document.body.getAttribute('data-theme');
+  const next=cur==='dark'?'light':'dark';
+  document.body.setAttribute('data-theme',next);save('ca2_theme',next);updateThemeUI(next);
+}
+function updateThemeUI(theme){
+  document.getElementById('theme-icon').textContent=theme==='dark'?'☀️':'🌙';
+  document.getElementById('theme-lbl').textContent=theme==='dark'?'Switch to Light Mode':'Switch to Dark Mode';
+}
+function clearAllData(){
+  if(!confirm('Delete ALL data? This cannot be undone.'))return;
+  localStorage.clear();location.reload();
+}
 </script>
 </body>
 </html>
